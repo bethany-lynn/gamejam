@@ -15,39 +15,75 @@ function App(props) {
 
     const canvasRef = useRef(null)
 
-    const draw = (ctx, frameCount) => {
-        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
-        ctx.fillStyle = '#000000'
-        ctx.beginPath()
-        ctx.arc(50, 100, 20 * Math.sin(frameCount * 0.05) ** 2, 0, 2 * Math.PI)
-        ctx.fill()
-    }
-
-    useEffect(() => {
-        const canvas = canvasRef.current
-        const context = canvas.getContext('2d')
-        let frameCount = 0
-        let animationFrameId
-
-        const rendering = () => {
-            frameCount++
-            draw(context, frameCount)
-            animationFrameId = window.requestAnimationFrame(rendering)
+    function drawBird(ctx, xBird, yBird, birdWidth, birdHeight) {
+        ctx.fillRect(xBird, yBird, birdWidth, birdHeight);
+      }
+    
+      useEffect(() => {
+        const canvas = canvasRef.current;
+        const context = canvas.getContext("2d");
+        let frameCount = 0;
+        let animationFrameId;
+    
+        let xBird = canvas.width / 6;
+        let yBird = canvas.height / 2;
+    
+        let birdWidth = 40;
+        let birdHeight = 40;
+        let upPressed = false;
+        let downPressed = false;
+    
+        document.addEventListener("keydown", keyDownHandler, false);
+        document.addEventListener("keyup", keyUpHandler, false);
+    
+        function keyDownHandler(e) {
+            if (e.key === "Up" || e.key === "ArrowUp") {
+                upPressed = true;
+              } else if (e.key === "Down" || e.key === "ArrowDown") {
+                downPressed = true;
+              }
+            }
+    
+        function keyUpHandler(e) {
+            if (e.key === "Up" || e.key === "ArrowUp") {
+                upPressed = false;
+              } else if (e.key === "Down" || e.key === "ArrowDown") {
+                downPressed = false;
+              }
+            }
+        function game() {
+            context.clearRect(0,0, canvas.width, canvas.height);
+    
+            drawBird(context, xBird, yBird, birdWidth, birdHeight);
+    
+            if (upPressed) {
+                yBird = Math.max(yBird - 13, 75);
+            } else if (downPressed) {
+                yBird = Math.min(yBird + 13, 600-birdHeight);
+            }
+    
+            requestAnimationFrame(game)
         }
-        rendering()
-        
-        return () => {
-            window.cancelAnimationFrame(animationFrameId)
-        }
-
-    }, [draw])
-
-    return (
+    
+        game();
+    
+      }, []);
+    
+      return (
         <>
-            <h1>hello birdies</h1>
-            <canvas className="birdCanvas" ref={canvasRef}{...props}></canvas>
+          <h1>hello birdies</h1>
+          <canvas
+            className="birdCanvas"
+            width="1200"
+            height="675"
+            ref={canvasRef}
+            {...props}
+          >
+            Bird Party Game!
+          </canvas>
         </>
-    )
-}
-
-export default App;
+      );
+    }
+    
+    export default App;
+    
