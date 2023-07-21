@@ -1,23 +1,27 @@
 import "./App.css";
 import { useRef, useEffect } from "react";
+import useBird from "./useBird";
 
 function App(props) {
   const canvasRef = useRef(null);
 
-  function drawBird(ctx, xBird, yBird, birdWidth, birdHeight) {
-    ctx.fillStyle = "#ffffff";
-    ctx.fillRect(xBird, yBird, birdWidth, birdHeight);
-  }
+  let birdWidth = 40;
+  let birdHeight = 40;
 
-  function drawObstacle(ctx, obstacleData, scale) {
+  // function drawBird(ctx, xBird, yBird, birdWidth, birdHeight) {
+  //   ctx.fillStyle = "#ffffff";
+  //   ctx.fillRect(xBird, yBird, birdWidth, birdHeight);
+  // }
+
+  let { drawBird } = useBird();
+
+  function drawObstacle(ctx) {
     let path = new Path2D(
-      "M5.23779 14.9023C3.95007 14.5651 3 13.3935 3 12C3 10.9133 3.57781 9.96153 4.44296 9.43519C4.77097 9.23564 5 8.88395 5 8.5C5 5.46243 7.46243 3 10.5 3C11.6319 3 12.684 3.34194 13.5585 3.92817C13.9304 4.17745 14.4138 4.20323 14.846 4.08641C15.0545 4.03006 15.2737 4 15.5 4C16.8807 4 18 5.11929 18 6.5C18 6.83774 18.1969 7.16713 18.5096 7.29468C19.9704 7.89045 21 9.32499 21 11C21 12.5603 20.1067 13.9119 18.8036 14.5713L18.1095 20.124C18.0469 20.6245 17.6215 21 17.1172 21H6.88278C6.37846 21 5.95306 20.6245 5.8905 20.124L5.23779 14.9023ZM7 8.5C7 9.68934 6.3092 10.6409 5.48246 11.1438C5.18886 11.3225 5 11.6401 5 12C5 12.5523 5.44772 13 6 13H17C18.1046 13 19 12.1046 19 11C19 10.1656 18.4885 9.44599 17.7544 9.14658C16.5999 8.67575 16 7.55001 16 6.5C16 6.22386 15.7761 6 15.5 6C15.4516 6 15.4078 6.00634 15.3679 6.01712C14.5571 6.23627 13.4331 6.25185 12.4449 5.58946C11.8895 5.21715 11.2231 5 10.5 5C8.567 5 7 6.567 7 8.5ZM7.26556 15L7.76556 19H9V15H7.26556ZM13 19V15H11V19H13ZM15 19H16.2344L16.7344 15H15V19Z"
+      "M24.85,10.126c2.018-4.783,6.628-8.125,11.99-8.125c7.223,0,12.425,6.179,13.079,13.543 c0,0,0.353,1.828-0.424,5.119c-1.058,4.482-3.545,8.464-6.898,11.503L24.85,48L7.402,32.165c-3.353-3.038-5.84-7.021-6.898-11.503 c-0.777-3.291-0.424-5.119-0.424-5.119C0.734,8.179,5.936,2,13.159,2C18.522,2,22.832,5.343,24.85,10.126z"
     );
-    ctx.save();
-    ctx.scale(scale, scale); // changing cupcake size
     ctx.beginPath();
     ctx.strokeStyle = "#000000";
-    ctx.fillStyle = obstacleData.color;
+    ctx.fillStyle = "#00c48d";
     ctx.stroke(path);
     ctx.fill(path);
     ctx.restore(); // original state
@@ -41,8 +45,8 @@ function App(props) {
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
-    // let frameCount = 0;
-    // let animationFrameId;
+    let frameCount = 0;
+    let animationFrameId;
 
     const numRows = 5; // Number of rows (changed to 3)
     const rowHeight = canvas.height / 5; // Height of each row
@@ -53,12 +57,6 @@ function App(props) {
 
     let xBird = canvas.width / 6;
     let yBird = canvas.height / 2;
-
-    let xProjectile = xBird + 10;
-    let yProjectile = yBird + 10;
-
-    let birdWidth = 40;
-    let birdHeight = 40;
 
     let upPressed = false;
     let downPressed = false;
@@ -72,8 +70,7 @@ function App(props) {
     function keyDownHandler(e) {
       if (e.key === "Up" || e.key === "ArrowUp") {
         upPressed = true;
-      }
-      if (e.key === "Down" || e.key === "ArrowDown") {
+      } else if (e.key === "Down" || e.key === "ArrowDown") {
         downPressed = true;
       }
       if (e.key === " " || e.code === "Space") {
@@ -100,6 +97,8 @@ function App(props) {
         upPressed = false;
       } else if (e.key === "Down" || e.key === "ArrowDown") {
         downPressed = false;
+      } else if (e.key === " " || e.code === "Space") {
+        spacePressed = false;
       }
     }
 
@@ -138,8 +137,8 @@ function App(props) {
 
     function game() {
       context.clearRect(0, 0, canvas.width, canvas.height);
-      const obstacleScale = 2;
-      drawBird(context, xBird, yBird, birdWidth, birdHeight);
+
+      drawBird(context, xBird, yBird);
 
       if (upPressed) {
         yBird = Math.max(yBird - 13, 75);
