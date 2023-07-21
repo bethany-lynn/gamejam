@@ -8,11 +8,6 @@ function App(props) {
   let birdWidth = 40;
   let birdHeight = 40;
 
-  // function drawBird(ctx, xBird, yBird, birdWidth, birdHeight) {
-  //   ctx.fillStyle = "#ffffff";
-  //   ctx.fillRect(xBird, yBird, birdWidth, birdHeight);
-  // }
-
   let { drawBird } = useBird();
 
   function drawObstacle(ctx) {
@@ -58,6 +53,9 @@ function App(props) {
     let xBird = canvas.width / 6;
     let yBird = canvas.height / 2;
 
+    let xProjectile = xBird + 10;
+    let yProjectile = yBird + 10;
+
     let upPressed = false;
     let downPressed = false;
     let projectileActive = false;
@@ -91,18 +89,16 @@ function App(props) {
         }
       }
     }
+  }
 
     function keyUpHandler(e) {
       if (e.key === "Up" || e.key === "ArrowUp") {
         upPressed = false;
       } else if (e.key === "Down" || e.key === "ArrowDown") {
         downPressed = false;
-      } else if (e.key === " " || e.code === "Space") {
-        spacePressed = false;
       }
     }
 
-    // window.onload = init;
     function init() {
       for (let i = 0; i < numRows; i++) {
         const interval = Math.random() * 2000 + 1000; // Random interval between 1000ms and 3000ms
@@ -139,6 +135,11 @@ function App(props) {
       context.clearRect(0, 0, canvas.width, canvas.height);
 
       drawBird(context, xBird, yBird);
+
+      if (projectileActive) {
+        drawProjectile(context, xProjectile, yProjectile, 20, 20);
+        yProjectile += 10;
+      }
 
       if (upPressed) {
         yBird = Math.max(yBird - 13, 75);
