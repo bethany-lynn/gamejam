@@ -29,9 +29,9 @@ function App(props) {
     const numRows = 3; // Number of rows (changed to 3)
     const rowHeight = canvas.height / 3; // Height of each row
     const shapeWidth = 50; // Width of the shape
-    let positionsX = []; // Array to store X positions for each row
+    // let positionsX = []; // Array to store X positions for each row
     const brickOffsetTop = 30;
-    const speed = 5;
+    // const speed = 7;
 
     let xBird = canvas.width / 6;
     let yBird = canvas.height / 2;
@@ -40,6 +40,7 @@ function App(props) {
     let birdHeight = 40;
     let upPressed = false;
     let downPressed = false;
+    let obstacleColumns = [];
 
     document.addEventListener("keydown", keyDownHandler, false);
     document.addEventListener("keyup", keyUpHandler, false);
@@ -63,42 +64,48 @@ function App(props) {
     // window.onload = init;
     function init() {
       for (let i = 0; i < numRows; i++) {
-        positionsX.push(canvas.width + i * (rowHeight * Math.random())); // Initialize the X positions for each row
+        const interval = Math.random() * 2000 + 1000; // Random interval between 1000ms and 3000ms
+        const speed = Math.random() * 2 + 3; // Random speed between 3 and 5
+        obstacleColumns.push({ x: canvas.width + i * (rowHeight * Math.random()), interval, speed });
       }
-      // game();
+    }
+
+
+    function game() {
+      context.clearRect(0, 0, canvas.width, canvas.height);
+
+      drawBird(context, xBird, yBird, birdWidth, birdHeight);
+
+      if (upPressed) {
+        yBird = Math.max(yBird - 13, 75);
+      } else if (downPressed) {
+        yBird = Math.min(yBird + 13, 600 - birdHeight);
       }
 
-
-      function game() {
-        context.clearRect(0, 0, canvas.width, canvas.height);
-
-        drawBird(context, xBird, yBird, birdWidth, birdHeight);
-
-        if (upPressed) {
-          yBird = Math.max(yBird - 13, 75);
-        } else if (downPressed) {
-          yBird = Math.min(yBird + 13, 600 - birdHeight);
+      for (let i = 0; i < numRows; i++) {
+        const { x, interval, speed } = obstacleColumns[i];
+        obstacleColumns[i].x -= speed;
+        
+        if (obstacleColumns[i].x + shapeWidth < 0) {
+          obstacleColumns[i].x = canvas.width + rowHeight * Math.random();
+          obstacleColumns[i].interval = Math.random() * 2000 + 1000; // Randomize the interval again
+          obstacleColumns[i].speed = Math.random() * 2 + 3; // Randomize the speed again
         }
-
-        for (let i = 0; i < numRows; i++) {
-          positionsX[i] -= speed;
-          if (positionsX[i] + shapeWidth < 0) {
-            positionsX[i] = canvas.width;
-          }
-          context.save();
-          context.translate(positionsX[i], i * rowHeight + brickOffsetTop);
-          drawObstacle(context);
-          context.restore();
-        }
-
-        requestAnimationFrame(game)
+        
+        context.save();
+        context.translate(x, i * rowHeight + brickOffsetTop);
+        drawObstacle(context);
+        context.restore();
       }
 
+      requestAnimationFrame(game)
+    }
 
-      init();
-      game();
 
-    }, []);
+    init();
+    game();
+
+  }, []);
 
   return (
     <>
