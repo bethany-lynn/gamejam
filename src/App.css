@@ -1,5 +1,5 @@
 .birdCanvas {
-    background: linear-gradient(90deg, #da627d, #a663cc);
+    background: linear-gradient(90deg, red, blue);
     display: block;
     margin: 0 auto;
 }
