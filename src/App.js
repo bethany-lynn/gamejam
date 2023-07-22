@@ -71,7 +71,7 @@ function App(props) {
     let xProjectile = xBird + 10;
     let yProjectile = yBird + 10;
 
-    let birdWidth = 40;
+    // let birdWidth = 40;
     let birdHeight = 40;
     let upPressed = false;
     let downPressed = false;
