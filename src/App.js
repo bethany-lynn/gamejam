@@ -3,8 +3,11 @@ import { useRef, useEffect } from 'react';
 import useBird from './useBird';
 
 function App(props) {
+  const canvasRef = useRef(null);
 
-  const canvasRef = useRef(null)
+  // let birdWidth = 40;
+  // let birdHeight = 40;
+
   let { drawBird } = useBird();
 
   function drawObstacle(ctx, obstacleData, scale) {
@@ -34,12 +37,26 @@ function App(props) {
     ctx.fillRect(xProjectile, yProjectile, projectileWidth, projectileHeight);
   }
 
+  function drawProjectile(
+    ctx,
+    xProjectile,
+    yProjectile,
+    projectileWidth,
+    projectileHeight
+  ) {
+    if (!(ctx instanceof CanvasRenderingContext2D)) {
+      console.error("Invalid context");
+      return;
+    }
+    ctx.fillStyle = "#000000";
+    ctx.fillRect(xProjectile, yProjectile, projectileWidth, projectileHeight);
+  }
 
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
-    // let frameCount = 0;
-    // let animationFrameId;
+    let frameCount = 0;
+    let animationFrameId;
 
     const numRows = 5; // Number of rows (changed to 3)
     const rowHeight = canvas.height / 5; // Height of each row
@@ -80,7 +97,25 @@ function App(props) {
           }, 1500);
         }
       }
+      if (e.key === " " || e.code === "Space") {
+        if (projectileActive) {
+          return;
+        } else {
+          projectileActive = true;
+          setTimeout(() => {
+            console.log(projectileActive);
+          }, 500);
+          setTimeout(() => {
+            console.log(projectileActive);
+          }, 1000);
+          setTimeout(() => {
+            projectileActive = false;
+            console.log(`projectileActive ${projectileActive}`);
+          }, 1500);
+        }
+      }
     }
+  
 
     function keyUpHandler(e) {
       if (e.key === "Up" || e.key === "ArrowUp") {
@@ -90,25 +125,41 @@ function App(props) {
       }
     }
 
-    // window.onload = init;
     function init() {
       for (let i = 0; i < numRows; i++) {
         const interval = Math.random() * 2000 + 1000; // Random interval between 1000ms and 3000ms
         const speed = Math.random() * 2 + 3;
         const color = getRandomColor();
-        obstacleColumns.push({ x: canvas.width + i * (rowHeight * Math.random()), interval, speed, color });
+        obstacleColumns.push({
+          x: canvas.width + i * (rowHeight * Math.random()),
+          interval,
+          speed,
+          color,
+        });
       }
     }
 
     function getRandomColor() {
       // Array of 10 colors to choose from
-      const colors = ['#D9ED92', '#B5E48C', '#99D98C', '#76C893', '#52B69A', '#34A0A4', '#168AAD', '#1A759F', '#1E6091', '#184E77'];
+      const colors = [
+        "#D9ED92",
+        "#B5E48C",
+        "#99D98C",
+        "#76C893",
+        "#52B69A",
+        "#34A0A4",
+        "#168AAD",
+        "#1A759F",
+        "#1E6091",
+        "#184E77",
+      ];
       // Randomly select a color from the colors array
       return colors[Math.floor(Math.random() * colors.length)];
     }
 
     function game() {
       context.clearRect(0, 0, canvas.width, canvas.height);
+
       const obstacleScale = 2;
       drawBird(context, xBird, yBird);
 
@@ -131,6 +182,19 @@ function App(props) {
         yBird = Math.min(yBird + 13, 600 - birdHeight);
       }
 
+      if (projectileActive) {
+        yProjectile += 8;
+        if (yProjectile > canvas.height) {
+          context.clearRect(0, canvas.height, canvas.width, canvas.height + 20);
+          projectileActive = false;
+          yProjectile = yBird;
+        }
+        // context.save()
+        // context.translate(0, yProjectile)
+        drawProjectile(context, xProjectile, yProjectile, 20, 20);
+        // context.restore()
+      }
+
       for (let i = 0; i < numRows; i++) {
         const { x, speed } = obstacleColumns[i];
         obstacleColumns[i].x -= speed;
@@ -148,13 +212,11 @@ function App(props) {
         context.restore();
       }
 
-      requestAnimationFrame(game)
+      requestAnimationFrame(game);
     }
 
-
     init();
-    game();
-
+    requestAnimationFrame(game);
   }, []);
 
   return (
