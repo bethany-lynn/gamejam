@@ -1,9 +1,8 @@
-import './App.css';
-import { useRef, useEffect } from 'react';
+import "./App.css";
+import { useRef, useEffect } from "react";
 
 function App(props) {
-
-  const canvasRef = useRef(null)
+  const canvasRef = useRef(null);
 
   function drawBird(ctx, xBird, yBird, birdWidth, birdHeight) {
     ctx.fillStyle = "#ffffff";
@@ -45,6 +44,7 @@ function App(props) {
     let birdHeight = 40;
     let upPressed = false;
     let downPressed = false;
+    let spacePressed = false;
     let obstacleColumns = [];
 
     document.addEventListener("keydown", keyDownHandler, false);
@@ -53,8 +53,12 @@ function App(props) {
     function keyDownHandler(e) {
       if (e.key === "Up" || e.key === "ArrowUp") {
         upPressed = true;
-      } else if (e.key === "Down" || e.key === "ArrowDown") {
+      }
+      if (e.key === "Down" || e.key === "ArrowDown") {
         downPressed = true;
+      }
+      if (e.key === " " || e.code === "Space") {
+        spacePressed = true;
       }
     }
 
@@ -116,7 +120,7 @@ function App(props) {
 
 
     init();
-    game();
+    requestAnimationFrame(game);
 
   }, []);
 
