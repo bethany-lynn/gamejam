@@ -111,6 +111,7 @@ function App(props) {
           color,
         });
       }
+      // yProjectile = yBird
     }
 
     function getRandomColor() {
@@ -137,8 +138,16 @@ function App(props) {
       drawBird(context, xBird, yBird);
 
       if (projectileActive) {
+        yProjectile += 8;
+        if (yProjectile > canvas.height) {
+          context.clearRect(0, canvas.height, canvas.width, canvas.height + 20)
+          projectileActive = false;
+          yProjectile = yBird
+        }
+        // context.save()
+        // context.translate(0, yProjectile)
         drawProjectile(context, xProjectile, yProjectile, 20, 20);
-        yProjectile += 10;
+        // context.restore()
       }
 
       if (upPressed) {
