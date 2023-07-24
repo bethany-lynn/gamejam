@@ -2,51 +2,20 @@ import './App.css';
 import { useRef, useEffect } from 'react';
 import useBird from './useBird';
 import useObstacle from './useObstacle';
+import useProjectile from './useProjectile';
 
 function App(props) {
   const canvasRef = useRef(null);
 
-  // let birdWidth = 40;
-  // let birdHeight = 40;
-
   let { drawBird } = useBird();
   let { drawObstacle } = useObstacle();
-
-  function drawProjectile(
-    ctx,
-    xProjectile,
-    yProjectile,
-    projectileWidth,
-    projectileHeight
-  ) {
-    if (!(ctx instanceof CanvasRenderingContext2D)) {
-      console.error("Invalid context");
-      return;
-    }
-    ctx.fillStyle = "#000000";
-    ctx.fillRect(xProjectile, yProjectile, projectileWidth, projectileHeight);
-  }
-
-  function drawProjectile(
-    ctx,
-    xProjectile,
-    yProjectile,
-    projectileWidth,
-    projectileHeight
-  ) {
-    if (!(ctx instanceof CanvasRenderingContext2D)) {
-      console.error("Invalid context");
-      return;
-    }
-    ctx.fillStyle = "#000000";
-    ctx.fillRect(xProjectile, yProjectile, projectileWidth, projectileHeight);
-  }
+  let { drawProjectile } = useProjectile();
 
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
-    let frameCount = 0;
-    let animationFrameId;
+    // let frameCount = 0;
+    // let animationFrameId;
 
     const numRows = 5; // Number of rows (changed to 3)
     const rowHeight = canvas.height / 5; // Height of each row
@@ -130,7 +99,6 @@ function App(props) {
     }
 
     function getRandomColor() {
-      // Array of 10 colors to choose from
       const colors = [
         "#D9ED92",
         "#B5E48C",
@@ -143,7 +111,6 @@ function App(props) {
         "#1E6091",
         "#184E77",
       ];
-      // Randomly select a color from the colors array
       return colors[Math.floor(Math.random() * colors.length)];
     }
 
@@ -207,7 +174,7 @@ function App(props) {
 
     init();
     requestAnimationFrame(game);
-  }, []);
+  }, [drawBird, drawObstacle, drawProjectile]);
 
   return (
     <>
@@ -226,3 +193,22 @@ function App(props) {
 }
 
 export default App;
+
+
+
+  // function drawProjectile(
+  //   ctx,
+  //   xProjectile,
+  //   yProjectile,
+  //   projectileWidth,
+  //   projectileHeight
+  // ) {
+  //   if (!(ctx instanceof CanvasRenderingContext2D)) {
+  //     console.error("Invalid context");
+  //     return;
+  //   }
+  //   ctx.fillStyle = "#000000";
+  //   ctx.fillRect(xProjectile, yProjectile, projectileWidth, projectileHeight);
+  // }
+  // let birdWidth = 40;
+  // let birdHeight = 40;
