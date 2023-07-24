@@ -14,15 +14,11 @@ function App(props) {
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
-    // let frameCount = 0;
-    // let animationFrameId;
 
-    const numRows = 5; // Number of rows (changed to 3)
-    const rowHeight = canvas.height / 5; // Height of each row
+    const numRows = 7; // Number of rows (changed to 3)
+    const rowHeight = canvas.height / numRows; // Height of each row
     const shapeWidth = 50; // Width of the shape
-    // let positionsX = []; // Array to store X positions for each row
     const brickOffsetTop = 30;
-    // const speed = 7;
 
     let xBird = canvas.width / 6;
     let yBird = canvas.height / 2;
@@ -30,7 +26,6 @@ function App(props) {
     let xProjectile = xBird + 10;
     let yProjectile = yBird + 10;
 
-    // let birdWidth = 40;
     let birdHeight = 40;
     let upPressed = false;
     let downPressed = false;
@@ -156,13 +151,12 @@ function App(props) {
         const { x, speed } = obstacleColumns[i];
         obstacleColumns[i].x -= speed;
 
-        if (obstacleColumns[i].x + shapeWidth < 0) {
+        if (obstacleColumns[i].x + shapeWidth < 0) { // when the shape is beyond the y axis
           obstacleColumns[i].x = canvas.width + rowHeight * Math.random();
           obstacleColumns[i].interval = Math.random() * 2000 + 1000; // Randomize the interval again
           obstacleColumns[i].speed = Math.random() * 2 + 3; // Randomize the speed again
           obstacleColumns[i].color = getRandomColor();
         }
-
         context.save();
         context.translate(x, i * rowHeight + brickOffsetTop);
         drawObstacle(context, obstacleColumns[i], obstacleScale);
@@ -212,3 +206,8 @@ export default App;
   // }
   // let birdWidth = 40;
   // let birdHeight = 40;
+
+      // let frameCount = 0;
+    // let animationFrameId;
+        // const speed = 7;
+            // let positionsX = []; // Array to store X positions for each row
