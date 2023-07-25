@@ -48,7 +48,7 @@ export default function useTargetController() {
     }
 
     // collisionDetected() {
-    //   this.targets.splice(this.targst)
+    //   this.targets.splice(this.target)
     // }
 
     isTargetOffScreen(target) {

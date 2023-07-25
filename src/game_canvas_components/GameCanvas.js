@@ -2,6 +2,7 @@ import { useRef, useEffect, useState } from "react";
 import useBird from "./custom_game_hooks/useBird";
 import useProjectileController from "./custom_game_hooks/useProjectileController";
 import useTargetController from "./custom_game_hooks/useTargetController";
+import useObstacleController from "./custom_game_hooks/useObstacleController";
 
 export default function GameCanvas(props) {
   // const { gameActive, setGameActive } = useState(true);
@@ -10,6 +11,7 @@ export default function GameCanvas(props) {
   let { Bird } = useBird();
   let { ProjectileController } = useProjectileController();
   let { TargetController } = useTargetController();
+  let { ObstacleController } = useObstacleController();
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -17,6 +19,7 @@ export default function GameCanvas(props) {
 
     const targetController = new TargetController(canvas);
     const projectileController = new ProjectileController(canvas);
+    const obstacleController = new ObstacleController(canvas);
     const bird = new Bird(
       canvas.width / 6,
       canvas.height / 2.1,
@@ -30,6 +33,7 @@ export default function GameCanvas(props) {
       bird.draw(context);
 
       targetController.draw(context, canvas.width, (8 * canvas.height) / 9);
+      obstacleController.draw(context, canvas.width, canvas.height)
 
       targetController.targets.forEach((target) => {
         if (projectileController.collideWith(target)) {
