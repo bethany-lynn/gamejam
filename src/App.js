@@ -1,5 +1,5 @@
 import "./App.css";
-import GameCanvas from "./GameCanvas";
+import GameCanvas from "./game_canvas_components/GameCanvas";
 
 function App(props) {
 
