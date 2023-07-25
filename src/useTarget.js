@@ -1,6 +1,6 @@
 export default function useTarget(props) {
 
-  let setScore = props.setScore
+  // let setScore = props.setScore
 
   class Target {
     constructor(x, y, speed) {

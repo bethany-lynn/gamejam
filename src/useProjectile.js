@@ -20,7 +20,7 @@ export default function useProjectile() {
 
       this.width = 20;
       this.height = 20;
-      this.color = "red";
+      this.color = "purple";
       // this.color = this.colors[Math.floor(Math.random() * this.colors.length)];
     }
 
@@ -37,7 +37,7 @@ export default function useProjectile() {
         this.y < sprite.y + sprite.height &&
         this.y + this.height > sprite.y
       ) {
-        sprite.takeDamage(this.damage);
+        // sprite.takeDamage(this.damage);
         return true;
       }
       return false;

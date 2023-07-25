@@ -11,6 +11,8 @@ export default function useTargetController() {
     targets = [];
     timerTillNextTarget = 0;
 
+    //method for generating targets with some randomness in delay between spawns
+
     spawn(x, y) {
       let speed = 15; // Random speed between 10-30
       let delay = Math.random() * 120; // Random interval between 1000ms and 3000ms
@@ -30,6 +32,7 @@ export default function useTargetController() {
           const index = this.targets.indexOf(target);
           this.targets.splice(index, 1);
         }
+        if (this.collideWith)
         target.draw(ctx);
       });
     }
@@ -43,6 +46,10 @@ export default function useTargetController() {
         return false;
       });
     }
+
+    // collisionDetected() {
+    //   this.targets.splice(this.targst)
+    // }
 
     isTargetOffScreen(target) {
       return target.x <= -target.width;

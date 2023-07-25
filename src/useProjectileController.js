@@ -4,7 +4,6 @@ export default function useProjectileController() {
   const { Projectile } = useProjectile();
 
   class ProjectileController {
-
     constructor(canvas) {
       this.canvas = canvas;
     }
@@ -46,5 +45,5 @@ export default function useProjectileController() {
       return projectile.y <= -projectile.height;
     }
   }
-  return {ProjectileController}
+  return { ProjectileController };
 }
