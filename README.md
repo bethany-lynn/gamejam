@@ -1,4 +1,4 @@
-## June and Bethany React Jam game time U+1F426
+## June and Bethany React Jam game time `U+1F426`
 
 ### Description
 
