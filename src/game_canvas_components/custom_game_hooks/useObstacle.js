@@ -1,20 +1,57 @@
-export default function useObstacle(props) {
-
+export default function useObstacle() {
   // let setScore = props.setScore
+
+  let balloonSheet = new Image();
+  balloonSheet.src = "/sprites/BallonSprites.png";
+
+  const scale = 2;
+  const width = 30;
+  const height = 50;
+  const scaledWidth = scale * width;
+  const scaledHeight = scale * height;
 
   class Obstacle {
     constructor(x, y, speed) {
       this.x = x;
       this.y = y;
       this.speed = speed;
-      this.width = 50;
-      this.height = 200;
+      this.scale = 2;
+      this.width = 30;
+      this.height = 50;
+      this.scaledWidth = scale * width;
+      this.scaledHeight = scale * height;
+      this.spriteSheet = balloonSheet;
+    }
+
+    drawFrame(ctx, frameX, frameY) {
+      this.spriteSheet.onload = () => {
+        ctx.drawImage(
+          this.spriteSheet,
+          frameX * width,
+          frameY * height,
+          this.width,
+          this.height,
+          this.x,
+          this.y,
+          this.scaledWidth,
+          this.scaledHeight
+        );
+      };
+    }
+
+    init(ctx) {
+      this.spriteSheet.onload = () => {
+        this.drawFrame(ctx, 0, 0, 50, 50);
+        this.drawFrame(ctx, 1, 0, scaledWidth, 50);
+        this.drawFrame(ctx, 0, 0, scaledWidth * 2, 50);
+        this.drawFrame(ctx, 2, 0, scaledWidth * 3, 50);
+      };
     }
 
     draw(ctx) {
       ctx.fillStyle = "green";
       this.x -= this.speed;
-      ctx.fillRect(this.x, this.y, this.width, this.height);
+      this.drawFrame(ctx, 0, 0);
     }
 
     collideWith(sprite) {
@@ -32,9 +69,6 @@ export default function useObstacle(props) {
 
   return { Obstacle };
 }
-
-
-
 
 // function obstacleData() {
 //   const obstacleScale = 2;
@@ -100,7 +134,7 @@ export default function useObstacle(props) {
 //     for (let i = 0; i < numRows; i++) {
 //         const { x, speed } = obstacleColumns[i];
 //         obstacleColumns[i].x -= speed;
-    
+
 //         if (obstacleColumns[i].x + shapeWidth < 0) {
 //             obstacleColumns[i].x = canvas.width + rowHeight * Math.random();
 //             obstacleColumns[i].interval = Math.random() * 2000 + 1000; // Randomize the interval again
