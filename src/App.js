@@ -122,10 +122,7 @@ function App(props) {
           projectileActive = false;
           yProjectile = yBird
         }
-        // context.save()
-        // context.translate(0, yProjectile)
         drawProjectile(context, xProjectile, yProjectile, 20, 20);
-        // context.restore()
       }
 
       if (upPressed) {
@@ -141,10 +138,7 @@ function App(props) {
           projectileActive = false;
           yProjectile = yBird;
         }
-        // context.save()
-        // context.translate(0, yProjectile)
         drawProjectile(context, xProjectile, yProjectile, 20, 20);
-        // context.restore()
       }
 
       for (let i = 0; i < numRows; i++) {
@@ -157,6 +151,7 @@ function App(props) {
           obstacleColumns[i].speed = Math.random() * 2 + 3; // Randomize the speed again
           obstacleColumns[i].color = getRandomColor();
         }
+
         context.save();
         context.translate(x, i * rowHeight + brickOffsetTop);
         drawObstacle(context, obstacleColumns[i], obstacleScale);
