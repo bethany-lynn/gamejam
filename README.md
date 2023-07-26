@@ -1,4 +1,4 @@
-## June and Bethany React Jam game time `U+1F426`
+## June and Bethany React Jam game time
 
 ### Description
 
@@ -20,5 +20,5 @@
 
 https://www.youtube.com/watch?v=i7FzA4NavDs&t=1227s
 
-![Screenshot 1](path/to/screenshot-1.png)
-![Screenshot 2](path/to/screenshot-2.png)
+<!-- ![Screenshot 1](path/to/screenshot-1.png)
+![Screenshot 2](path/to/screenshot-2.png) -->
