@@ -1,9 +1,9 @@
 ## June and Bethany React Jam game time
 
 ### Description
-Lil Bird is just trying to fly peacefull through her forest, enjoying the sounds and sights of nature. But a group of
-loud and messy group of humans are disrupting her peaceful afternoon with their human party. How rude! Their balloons and 
-snacks are getting everywhere, and Lil Bird needs to be careful as she flies!
+Lil Bird is just trying to fly peacefully through her forest, enjoying the sounds and sights of nature. But a group of
+loud and messy humans are disrupting her peaceful afternoon with their human party. How rude! Their balloons and 
+snacks are getting everywhere, and Lil Bird needs to be careful as she flies home.
 Maybe she should send these humans a little message, in the form of a dropping, so they know better than to litter
 in her home!
 
