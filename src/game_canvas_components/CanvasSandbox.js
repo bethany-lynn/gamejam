@@ -4,11 +4,7 @@ import useProjectileController from "./custom_game_hooks/useProjectileController
 import useTargetController from "./custom_game_hooks/useTargetController";
 import useObstacleController from "./custom_game_hooks/useObstacleController";
 
-export default function GameCanvas(props) {
-  const [gameStopped, setGameStopped] = useState(false);
-
-  const canvasRef = useRef();
-
+const useGame = (canvasRef) => {
   let { Bird } = useBird();
   let { ProjectileController } = useProjectileController();
   let { TargetController } = useTargetController();
@@ -44,7 +40,7 @@ export default function GameCanvas(props) {
       });
 
       if (
-        obstacleController.collideWith(bird)
+        obstacleController.collideWith(bird, setGameStopped, props.setGameOver)
       ) {
         // props.setGameOver(true);
         // setGameActive(false);
@@ -59,6 +55,14 @@ export default function GameCanvas(props) {
     requestAnimationFrame(game);
     return () => cancelAnimationFrame(frameId);
   }, []);
+}
+
+export default function GameCanvas(props) {
+  const [gameStopped, setGameStopped] = useState(false);
+
+  const canvasRef = useRef();
+
+  const gamer = useGame(canvasRef);
 
   return (
     <>
