@@ -1,4 +1,4 @@
-## June and Bethany React Jam game time
+## Lil Bird Fly Home
 
 ### Description
 Lil Bird is just trying to fly peacefully through her forest, enjoying the sounds and sights of nature. But a group of
@@ -27,9 +27,9 @@ Coding and learning should be fun, albeit sometimes stressful and full of unknow
 until new things are tried!
 
 ### Resources
-opengameart.org
-MDN Web Docs
-W3 schools
+opengameart.org <br/>
+MDN Web Docs <br/>
+W3 schools <br/>
 Create React app
 
 ### Contributors
