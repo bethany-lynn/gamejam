@@ -6,13 +6,14 @@ import useObstacleController from "./custom_game_hooks/useObstacleController";
 
 export default function GameCanvas(props) {
   const [gameStopped, setGameStopped] = useState(false);
+  const [collisionWithObstacle, setCollisionWithObstacle] = useState(false);
 
   const canvasRef = useRef();
 
   let { Bird } = useBird();
   let { ProjectileController } = useProjectileController();
   let { TargetController } = useTargetController();
-  let { ObstacleController } = useObstacleController();
+  let { ObstacleController } = useObstacleController({setCollisionWithObstacle});
 
   useEffect(() => {
     const canvas = canvasRef.current;
