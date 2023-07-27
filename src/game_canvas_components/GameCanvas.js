@@ -15,6 +15,8 @@ export default function GameCanvas(props) {
   let { TargetController } = useTargetController();
   let { ObstacleController } = useObstacleController({setCollisionWithObstacle});
 
+  let score = 0;
+
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
@@ -41,6 +43,8 @@ export default function GameCanvas(props) {
       targetController.targets.forEach((target) => {
         if (projectileController.collideWith(target)) {
           console.log("collision logged");
+          score +=1;
+          props.setScore(score);
         }
       });
 
