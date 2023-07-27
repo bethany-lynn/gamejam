@@ -56,6 +56,16 @@ export default function useObstacle() {
       this.ready = true;
     }
 
+    predraw(ctx) {
+      if (this.ready) {
+        this.drawFrame(ctx, 5, 1, this.x, this.y);
+        this.drawFrame(ctx, 6, 1, this.x, this.y);
+        this.drawFrame(ctx, 7, 1, this.x, this.y);
+        this.drawFrame(ctx, 8, 1, this.x, this.y);
+        this.drawFrame(ctx, 8, 1, this.x, this.y);
+      }
+    }
+
     draw(ctx) {
       if (!this.ready) {return}
       ctx.fillStyle = 'rgba(225,225,225,0.5)';

@@ -78,7 +78,7 @@ export default function useObstacleController(props) {
     }
 
     isTargetOffScreen(obstacle) {
-      return obstacle.x <= -obstacle.width;
+      return obstacle.x <= -2*obstacle.width;
     }
   }
 
