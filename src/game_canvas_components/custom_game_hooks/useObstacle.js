@@ -12,9 +12,11 @@ export default function useObstacle(props) {
     }
 
     draw(ctx) {
-      ctx.fillStyle = "green";
+      ctx.strokeStyle = "#000000";
+      ctx.fillStyle = "cyan";
       this.x -= this.speed;
       ctx.fillRect(this.x, this.y, this.width, this.height);
+      ctx.strokeRect(this.x, this.y, this.width, this.height);
     }
 
     collideWith(sprite) {

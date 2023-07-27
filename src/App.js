@@ -6,17 +6,31 @@ import React, { useState } from "react";
 function App(props) {
   let [gameOver, setGameOver] = useState(false);
 
+  const detectCollisionWithObstacle = (collisionOccured) => {
+    if (collisionOccured) {
+      setGameOver(true);
+    }
+  };
+
   return (
     <>
       <h1>hello birdies</h1>
-      {!gameOver ? <GameCanvas gameOver={gameOver} setGameOver={setGameOver} /> : <EndScreen />}
+      {!gameOver ? (
+        <GameCanvas
+          gameOver={gameOver}
+          setGameOver={setGameOver}
+          setCollisionWithObstacle={detectCollisionWithObstacle}
+          />
+      ) : (
+        <EndScreen />
+      )}
     </>
   );
 }
 
 export default App;
 
-
+// {/* <GameCanvas gameOver={gameOver} setGameOver={setGameOver} /> : <EndScreen />} */}
 
   // function drawProjectile(
   //   ctx,
