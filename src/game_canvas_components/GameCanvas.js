@@ -59,6 +59,7 @@ export default function GameCanvas(props) {
       context.clearRect(0, 0, canvas.width, canvas.height);
 
       projectileController.draw(context);
+      
       bird.draw(context, birdLoopIndex);
 
       targetController.draw(
