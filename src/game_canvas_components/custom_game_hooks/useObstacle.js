@@ -1,20 +1,68 @@
-export default function useObstacle(props) {
-
+export default function useObstacle() {
   // let setScore = props.setScore
+
+  let balloonSheet = new Image();
+  balloonSheet.src = "/sprites/BalloonSprites.png"
+
+  const scale = 2;
+  const width = 30;
+  const height = 50;
+  const scaledWidth = scale * width;
+  const scaledHeight = scale * height;
+
+  // A Promise to handle image loading
+  const imageLoadedPromise = new Promise((resolve, reject) => {
+    balloonSheet.onload = () => {
+      resolve();
+    };
+    balloonSheet.onerror = (error) => {
+      reject(error);
+      console.error("Error loading image:", error);
+    };
+  });
 
   class Obstacle {
     constructor(x, y, speed) {
       this.x = x;
       this.y = y;
       this.speed = speed;
-      this.width = 50;
-      this.height = 200;
+      this.scale = 4.5;
+      this.width = 22.4; // 224px across / 10 columns
+      this.height = 44.5; // 132px down / 3 rows
+      this.scaledWidth = this.scale * this.width;
+      this.scaledHeight = this.scale * this.height;
+      this.spriteSheet = balloonSheet;
+      this.ready = false;
+    }
+
+    drawFrame(ctx, frameX, frameY, canvasX, canvasY) {
+      if (this.ready) {
+        ctx.drawImage(
+          this.spriteSheet,
+          frameX * this.width,
+          frameY * this.height,
+          this.width,
+          this.height,
+          canvasX,
+          canvasY,
+          this.scaledWidth,
+          this.scaledHeight
+        );
+      }
+    }
+
+    async init() {
+      await imageLoadedPromise; // Wait for the image to load before setting 'ready' to true
+      this.ready = true;
     }
 
     draw(ctx) {
-      ctx.fillStyle = "green";
+      if (!this.ready) {return}
+      ctx.fillStyle = 'rgba(225,225,225,0.5)';
       this.x -= this.speed;
-      ctx.fillRect(this.x, this.y, this.width, this.height);
+      ctx.fillRect(this.x, this.y, this.scaledWidth, this.scaledHeight);
+      this.drawFrame(ctx, 9, 1, this.x, this.y);
+      // ctx.fillRect(this.x, this.y, 40, 40)
     }
 
     collideWith(sprite) {
@@ -30,11 +78,8 @@ export default function useObstacle(props) {
     }
   }
 
-  return { Obstacle };
+  return { Obstacle, init: () => balloonSheet };
 }
-
-
-
 
 // function obstacleData() {
 //   const obstacleScale = 2;
@@ -100,7 +145,7 @@ export default function useObstacle(props) {
 //     for (let i = 0; i < numRows; i++) {
 //         const { x, speed } = obstacleColumns[i];
 //         obstacleColumns[i].x -= speed;
-    
+
 //         if (obstacleColumns[i].x + shapeWidth < 0) {
 //             obstacleColumns[i].x = canvas.width + rowHeight * Math.random();
 //             obstacleColumns[i].interval = Math.random() * 2000 + 1000; // Randomize the interval again

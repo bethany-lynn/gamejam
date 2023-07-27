@@ -5,11 +5,14 @@ import React, { useState } from "react";
 
 function App(props) {
   let [gameOver, setGameOver] = useState(false);
+  let [score, setScore] = useState(0);
 
   return (
     <>
       <h1>hello birdies</h1>
-      {!gameOver ? <GameCanvas gameOver={gameOver} setGameOver={setGameOver} /> : <EndScreen />}
+      <h2>{score}</h2>
+      <img src="/sprites/BalloonSprites.png" alt="BalloonSprites" />
+      {!gameOver ? <GameCanvas gameOver={gameOver} setGameOver={setGameOver} setScore={setScore} /> : <EndScreen />}
     </>
   );
 }
