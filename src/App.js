@@ -9,6 +9,7 @@ function App(props) {
   return (
     <>
       <h1>hello birdies</h1>
+      <img src="/sprites/BalloonSprites.png" alt="BalloonSprites" />
       {!gameOver ? <GameCanvas gameOver={gameOver} setGameOver={setGameOver} /> : <EndScreen />}
     </>
   );
