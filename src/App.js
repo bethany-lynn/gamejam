@@ -5,6 +5,7 @@ import React, { useState } from "react";
 
 function App(props) {
   let [gameOver, setGameOver] = useState(false);
+  let [score, setScore] = useState(0);
 
   const detectCollisionWithObstacle = (collisionOccured) => {
     if (collisionOccured) {
@@ -15,11 +16,13 @@ function App(props) {
   return (
     <>
       <h1>hello birdies</h1>
+      <h2>{score}</h2>
       {!gameOver ? (
         <GameCanvas
           gameOver={gameOver}
           setGameOver={setGameOver}
           setCollisionWithObstacle={detectCollisionWithObstacle}
+          setScore={setScore}
           />
       ) : (
         <EndScreen />

@@ -15,6 +15,8 @@ export default function GameCanvas(props) {
   let { TargetController } = useTargetController();
   let { ObstacleController } = useObstacleController({setCollisionWithObstacle});
 
+  let score = 0;
+
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
@@ -36,13 +38,21 @@ export default function GameCanvas(props) {
       bird.draw(context);
 
       targetController.draw(context, canvas.width, (8 * canvas.height) / 9);
-      obstacleController.draw(context, canvas.width, canvas.height);
+      obstacleController.draw(context, canvas.width, canvas.height, score);
 
       targetController.targets.forEach((target) => {
         if (projectileController.collideWith(target)) {
           console.log("collision logged");
+          score +=1;
+          props.setScore(score);
         }
       });
+
+      obstacleController.obstacles.forEach((obstacle) => {
+        if (projectileController.collideWith(obstacle)) {
+          console.log("hit a balloon")
+        }
+      })
 
       if (
         obstacleController.collideWith(bird)
@@ -52,6 +62,7 @@ export default function GameCanvas(props) {
         console.log("bird collided with obstacle");
         console.log(`Game is stopped: ${gameStopped}`);
         // console.log(`state of the game:  ${gameOver}`);
+        // console.log("Game Over.")
       }
 
       frameId = requestAnimationFrame(game);
