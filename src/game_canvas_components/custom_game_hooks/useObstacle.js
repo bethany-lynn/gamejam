@@ -1,17 +1,10 @@
 export default function useObstacle() {
-  // let setScore = props.setScore
 
   let balloonSheet = new Image();
   balloonSheet.src = "/sprites/BalloonSprites.png";
 
-  const scale = 2;
-  const width = 30;
-  const height = 50;
-  const scaledWidth = scale * width;
-  const scaledHeight = scale * height;
-
   // A Promise to handle image loading
-  const imageLoadedPromise = new Promise((resolve, reject) => {
+  const balloonSheetLoadedPromise = new Promise((resolve, reject) => {
     balloonSheet.onload = () => {
       resolve();
     };
@@ -26,14 +19,13 @@ export default function useObstacle() {
       this.x = x;
       this.y = y;
       this.speed = speed;
-      this.scale = 4.5;
+      this.scale = 3;
       this.width = 22.4; // 224px across / 10 columns
       this.height = 44.5; // 132px down / 3 rows
       this.scaledWidth = this.scale * this.width;
       this.scaledHeight = this.scale * this.height;
       this.spriteSheet = balloonSheet;
       this.ready = false;
-      // this.frameArray = [];
     }
 
     drawFrame(ctx, frameX, frameY, canvasX, canvasY) {
@@ -53,21 +45,9 @@ export default function useObstacle() {
     }
 
     async init() {
-      await imageLoadedPromise; // Wait for the image to load before setting 'ready' to true
+      await balloonSheetLoadedPromise; // Wait for the image to load before setting 'ready' to true
       this.ready = true;
     }
-
-    // async loadFrames(ctx) {
-    //   if (this.ready) {
-    //     this.frameArray = [
-    //       this.drawFrame(ctx, 5, 1, this.x, this.y),
-    //       this.drawFrame(ctx, 6, 1, this.x, this.y),
-    //       this.drawFrame(ctx, 7, 1, this.x, this.y),
-    //       this.drawFrame(ctx, 8, 1, this.x, this.y),
-    //       this.drawFrame(ctx, 9, 1, this.x, this.y),
-    //     ];
-    //   }
-    // } 
 
     draw(ctx, obstacleLoopIndex) {
       if (!this.ready) {

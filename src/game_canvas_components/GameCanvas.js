@@ -23,6 +23,7 @@ export default function GameCanvas(props) {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
     let frameCount = 0; // assuming ~ 60 fps
+    let birdLoopIndex = 0;
     let obstacleLoopIndex = 0; //aiming for 5 frames a second loop, 12 frames per cycle
 
     const targetController = new TargetController(canvas);
@@ -37,8 +38,12 @@ export default function GameCanvas(props) {
     function game() {
       frameCount++;
 
-      if (frameCount && frameCount % 24 == 0) {
+      if (frameCount && frameCount % 12 == 0) {
+        birdLoopIndex += 1;
         obstacleLoopIndex += 1;
+      }
+      if (birdLoopIndex > 2) {
+        birdLoopIndex = 0;
       }
       if (obstacleLoopIndex > 4) {
         obstacleLoopIndex = 0;
@@ -47,7 +52,7 @@ export default function GameCanvas(props) {
       context.clearRect(0, 0, canvas.width, canvas.height);
 
       projectileController.draw(context);
-      bird.draw(context);
+      bird.draw(context, birdLoopIndex);
 
       targetController.draw(context, canvas.width, (8 * canvas.height) / 9);
       obstacleController.draw(
