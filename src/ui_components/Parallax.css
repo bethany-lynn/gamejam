@@ -1,0 +1,49 @@
+.parallax-wrapper {
+    overflow: hidden;
+    position: relative;
+    width: 1200px;
+    height: 675px;
+    background-color: aquamarine;
+}
+
+.forest {
+    position: absolute;
+    height: 675px;
+    width: 3468px; /* this value is 3X width of image file */
+    animation: horizontalScroll infinite linear;
+    overflow: hidden;
+}
+
+#backtrees {
+    background-image: url(../images/backtrees.png);
+    animation-duration: 4000ms;
+    background-repeat: repeat-x;
+}
+
+#sunlight {
+    background-image: url(../images/sunlight.png);
+    animation-duration: 3750ms;
+    background-repeat: repeat-x;
+}
+
+#middletrees {
+    background-image: url(../images/middletrees.png);
+    animation-duration: 3500ms;
+    background-repeat: repeat-x;
+}
+
+#fronttrees {
+    background-image: url(../images/fronttrees.png);
+    animation-duration: 3000ms;
+    background-repeat: repeat-x;
+}
+
+@keyframes horizontalScroll {
+    from {
+        transform: translateX(0px);
+    }
+
+    to {
+        transform: translateX(-1156px);
+    }
+}

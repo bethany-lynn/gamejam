@@ -3,6 +3,15 @@ import useBird from "./custom_game_hooks/useBird";
 import useProjectileController from "./custom_game_hooks/useProjectileController";
 import useTargetController from "./custom_game_hooks/useTargetController";
 import useObstacleController from "./custom_game_hooks/useObstacleController";
+import './GameCanvas.css';
+
+
+//parallax background
+// import bgLayer1 from '../images/backtrees.png'
+// import bgLayer2 from '../images/middletrees.png'
+// import bgLayer3 from '../images/fronttrees.png'
+// import bgLayer4 from '../images/sunlight.png'
+
 
 export default function GameCanvas(props) {
   // const [gameStopped, setGameStopped] = useState(false);
@@ -10,6 +19,28 @@ export default function GameCanvas(props) {
   const [collidedTarget, setCollidedTarget] = useState(null);
 
   const canvasRef = useRef();
+
+  // parallax state storage
+  // const [BgLayers, setBgLayers] = useState([]);
+  // const [layerOffsets, setLayerOffsets] = useState(() => [0, 0, 0, 0]); // initial offsets
+
+  // const updateLayerOffsets = (canvas) => {
+  //   setLayerOffsets((prevOffsets) => {
+  //     return prevOffsets.map((offset, index) => {
+  //       const speedFactor = index + 1; // Adjust the speed factor as needed
+  //       const maxOffset = BgLayers[index].width - canvas.width; // Adjust based on image and canvas dimensions
+  //       let newOffset = offset - speedFactor;
+
+  //       if (newOffset < -maxOffset) {
+  //         // Reset offset if it goes beyond the maximum
+  //         newOffset = 0;
+  //       }
+
+  //       return newOffset;
+  //     });
+  //   });
+  // };
+
 
   let { Bird } = useBird();
   let { ProjectileController } = useProjectileController();
@@ -86,6 +117,7 @@ export default function GameCanvas(props) {
           console.log("hit a target");
           score += 1;
           // setCollidedTarget(target); // Store the collided target
+          // props.setScore(score);
         }
       });
 
@@ -98,6 +130,9 @@ export default function GameCanvas(props) {
       if (obstacleController.collideWith(bird)) {
         props.setGameOver(true);
         console.log("bird collided with obstacle");
+        // console.log(`Game is stopped: ${gameStopped}`);
+        // console.log(`state of the game:  ${gameOver}`);
+        // console.log("Game Over.")
       }
 
       requestAnimationFrame(game);
