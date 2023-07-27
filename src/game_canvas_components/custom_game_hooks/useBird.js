@@ -1,6 +1,6 @@
 export default function useBird() {
   let birdSheet = new Image();
-  birdSheet.src = "/sprites/bird_2_cardinal.png";
+  birdSheet.src = "/sprites/bird_3_robin.png";
 
   // A Promise to handle image loading
   const birdSheetLoadedPromise = new Promise((resolve, reject) => {

@@ -45,14 +45,14 @@ export default function useObstacleController(props) {
       const row = this.randomRow();
       this.spawn(x, (row * y) / 5 - this.offset, score);
 
-      if (!this.hasCollisionOccurred) {
-        const collisionDetected = this.collideWith({ x: x, y: y });
+    //   if (!this.hasCollisionOccurred) {
+    //     const collisionDetected = this.collideWith({ x: x, y: y });
 
-        if (collisionDetected) {
-          this.hasCollisionOccurred = true;
-          props.setCollisionWithObstacle(true);
-        }
-      }
+    //     if (collisionDetected) {
+    //       this.hasCollisionOccurred = true;
+    //     //   props.setCollisionWithObstacle(true);
+    //     }
+    //   }
 
       this.obstacles.forEach((obstacle) => {
         if (this.isTargetOffScreen(obstacle)) {
@@ -79,7 +79,7 @@ export default function useObstacleController(props) {
 
         if (collisionDetected) {
           this.hasCollisionOccurred = true;
-          props.setCollisionWithObstacle(true);
+        //   props.setCollisionWithObstacle(true);
           return true;
         }
       }

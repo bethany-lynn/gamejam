@@ -24,7 +24,7 @@ export default function useTargetController() {
 
     spawn(x, y) {
       if (this.ready) {
-        let speed = 15; // Random speed between 10-30
+        let speed = 10; // Random speed between 10-30
         let delay = Math.random() * 120; // Random interval between 1000ms and 3000ms
 
         if (this.timerTillNextTarget <= 0) {

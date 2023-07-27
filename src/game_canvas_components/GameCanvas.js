@@ -6,16 +6,17 @@ import useObstacleController from "./custom_game_hooks/useObstacleController";
 
 export default function GameCanvas(props) {
   // const [gameStopped, setGameStopped] = useState(false);
-  const [collisionWithObstacle, setCollisionWithObstacle] = useState(false);
+  // const [collisionWithObstacle, setCollisionWithObstacle] = useState(false);
+  const [collidedTarget, setCollidedTarget] = useState(null);
 
   const canvasRef = useRef();
 
   let { Bird } = useBird();
   let { ProjectileController } = useProjectileController();
   let { TargetController } = useTargetController();
-  let { ObstacleController } = useObstacleController({
-    setCollisionWithObstacle,
-  });
+  let { ObstacleController } = useObstacleController(
+    // {setCollisionWithObstacle,}
+  );
 
   let score = 0;
 
@@ -49,7 +50,7 @@ export default function GameCanvas(props) {
       }
       if (obstacleLoopIndex > 4) {
         obstacleLoopIndex = 0;
-      }
+      }  
       if (foodLoopIndex > 1) {
         foodLoopIndex = 0;
       }
@@ -84,7 +85,7 @@ export default function GameCanvas(props) {
         if (projectileController.collideWith(target)) {
           console.log("hit a target");
           score += 1;
-          props.setScore(score);
+          // setCollidedTarget(target); // Store the collided target
         }
       });
 
@@ -96,11 +97,7 @@ export default function GameCanvas(props) {
 
       if (obstacleController.collideWith(bird)) {
         props.setGameOver(true);
-        // setGameActive(false);
         console.log("bird collided with obstacle");
-        // console.log(`Game is stopped: ${gameStopped}`);
-        // console.log(`state of the game:  ${gameOver}`);
-        // console.log("Game Over.")
       }
 
       requestAnimationFrame(game);
@@ -115,6 +112,19 @@ export default function GameCanvas(props) {
     TargetController,
     // gameStopped,
   ]);
+
+    // Handle collision after the game loop is completed
+    useEffect(() => {
+      if (collidedTarget) {
+        // Update the score and handle other actions
+        props.setScore((score) => score + 1);
+        // Perform any other actions based on the collision, e.g., removing the target
+        // and handling game over conditions
+  
+        // Reset the collidedTarget state to null after processing the collision
+        setCollidedTarget(null);
+      }
+    }, [collidedTarget]);
 
   return (
     <>
