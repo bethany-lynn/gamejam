@@ -13,14 +13,17 @@ export default function GameCanvas(props) {
   let { Bird } = useBird();
   let { ProjectileController } = useProjectileController();
   let { TargetController } = useTargetController();
-  let { ObstacleController } = useObstacleController({setCollisionWithObstacle});
+  let { ObstacleController } = useObstacleController({
+    setCollisionWithObstacle,
+  });
 
   let score = 0;
 
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
-    let frameId;
+    let frameCount = 0; // assuming ~ 60 fps
+    let obstacleLoopIndex = 0; //aiming for 5 frames a second loop, 12 frames per cycle
 
     const targetController = new TargetController(canvas);
     const projectileController = new ProjectileController(canvas);
@@ -32,31 +35,44 @@ export default function GameCanvas(props) {
     );
 
     function game() {
+      frameCount++;
+
+      if (frameCount && frameCount % 24 == 0) {
+        obstacleLoopIndex += 1;
+      }
+      if (obstacleLoopIndex > 4) {
+        obstacleLoopIndex = 0;
+      }
+
       context.clearRect(0, 0, canvas.width, canvas.height);
 
       projectileController.draw(context);
       bird.draw(context);
 
       targetController.draw(context, canvas.width, (8 * canvas.height) / 9);
-      obstacleController.draw(context, canvas.width, canvas.height, score);
+      obstacleController.draw(
+        context,
+        canvas.width,
+        canvas.height,
+        score,
+        obstacleLoopIndex
+      );
 
       targetController.targets.forEach((target) => {
         if (projectileController.collideWith(target)) {
           console.log("collision logged");
-          score +=1;
+          score += 1;
           props.setScore(score);
         }
       });
 
       obstacleController.obstacles.forEach((obstacle) => {
         if (projectileController.collideWith(obstacle)) {
-          console.log("hit a balloon")
+          console.log("hit a balloon");
         }
-      })
+      });
 
-      if (
-        obstacleController.collideWith(bird)
-      ) {
+      if (obstacleController.collideWith(bird)) {
         props.setGameOver(true);
         // setGameActive(false);
         console.log("bird collided with obstacle");
@@ -65,12 +81,18 @@ export default function GameCanvas(props) {
         // console.log("Game Over.")
       }
 
-      frameId = requestAnimationFrame(game);
+      requestAnimationFrame(game);
     }
 
     requestAnimationFrame(game);
-    return () => cancelAnimationFrame(frameId);
-  }, [Bird, ObstacleController, ProjectileController, TargetController, gameStopped]);
+    // return () => cancelAnimationFrame(frameId);
+  }, [
+    Bird,
+    ObstacleController,
+    ProjectileController,
+    TargetController,
+    gameStopped,
+  ]);
 
   return (
     <>

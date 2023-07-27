@@ -2,7 +2,7 @@ export default function useObstacle() {
   // let setScore = props.setScore
 
   let balloonSheet = new Image();
-  balloonSheet.src = "/sprites/BalloonSprites.png"
+  balloonSheet.src = "/sprites/BalloonSprites.png";
 
   const scale = 2;
   const width = 30;
@@ -33,6 +33,7 @@ export default function useObstacle() {
       this.scaledHeight = this.scale * this.height;
       this.spriteSheet = balloonSheet;
       this.ready = false;
+      // this.frameArray = [];
     }
 
     drawFrame(ctx, frameX, frameY, canvasX, canvasY) {
@@ -56,22 +57,26 @@ export default function useObstacle() {
       this.ready = true;
     }
 
-    predraw(ctx) {
-      if (this.ready) {
-        this.drawFrame(ctx, 5, 1, this.x, this.y);
-        this.drawFrame(ctx, 6, 1, this.x, this.y);
-        this.drawFrame(ctx, 7, 1, this.x, this.y);
-        this.drawFrame(ctx, 8, 1, this.x, this.y);
-        this.drawFrame(ctx, 8, 1, this.x, this.y);
-      }
-    }
+    // async loadFrames(ctx) {
+    //   if (this.ready) {
+    //     this.frameArray = [
+    //       this.drawFrame(ctx, 5, 1, this.x, this.y),
+    //       this.drawFrame(ctx, 6, 1, this.x, this.y),
+    //       this.drawFrame(ctx, 7, 1, this.x, this.y),
+    //       this.drawFrame(ctx, 8, 1, this.x, this.y),
+    //       this.drawFrame(ctx, 9, 1, this.x, this.y),
+    //     ];
+    //   }
+    // } 
 
-    draw(ctx) {
-      if (!this.ready) {return}
-      ctx.fillStyle = 'rgba(225,225,225,0.5)';
+    draw(ctx, obstacleLoopIndex) {
+      if (!this.ready) {
+        return;
+      }
+      ctx.fillStyle = "rgba(225,225,225,0.5)";
       this.x -= this.speed;
       ctx.fillRect(this.x, this.y, this.scaledWidth, this.scaledHeight);
-      this.drawFrame(ctx, 9, 1, this.x, this.y);
+      this.drawFrame(ctx, 5 + obstacleLoopIndex, 1, this.x, this.y)
       // ctx.fillRect(this.x, this.y, 40, 40)
     }
 

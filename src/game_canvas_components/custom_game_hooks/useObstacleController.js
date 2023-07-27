@@ -17,6 +17,7 @@ export default function useObstacleController(props) {
     async initObstacle() {
       const obstacle = new Obstacle(0, 200, 15); // Set initial x, y, and speed as needed
       await obstacle.init(); // Wait for the obstacle to be ready (image loaded)
+    //   await obstacle.loadFrames(ctx);
       this.obstacles.push(obstacle);
       this.ready = true;
     }
@@ -41,7 +42,7 @@ export default function useObstacleController(props) {
       }
     }
 
-    draw(ctx, x, y, score) {
+    draw(ctx, x, y, score, obstacleLoopIndex) {
       const row = this.randomRow();
       this.spawn(x, (row * y) / 5 - this.offset, score);
 
@@ -59,7 +60,7 @@ export default function useObstacleController(props) {
           const index = this.obstacles.indexOf(obstacle);
           this.obstacles.splice(index, 1);
         }
-        if (this.collideWith) obstacle.draw(ctx);
+        if (this.collideWith) obstacle.draw(ctx, obstacleLoopIndex);
       });
     }
 
