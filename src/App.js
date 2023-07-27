@@ -7,19 +7,33 @@ function App(props) {
   let [gameOver, setGameOver] = useState(false);
   let [score, setScore] = useState(0);
 
+  const detectCollisionWithObstacle = (collisionOccured) => {
+    if (collisionOccured) {
+      setGameOver(true);
+    }
+  };
+
   return (
     <>
       <h1>hello birdies</h1>
       <h2>{score}</h2>
-      <img src="/sprites/BalloonSprites.png" alt="BalloonSprites" />
-      {!gameOver ? <GameCanvas gameOver={gameOver} setGameOver={setGameOver} setScore={setScore} /> : <EndScreen />}
+      {!gameOver ? (
+        <GameCanvas
+          gameOver={gameOver}
+          setGameOver={setGameOver}
+          setCollisionWithObstacle={detectCollisionWithObstacle}
+          setScore={setScore}
+          />
+      ) : (
+        <EndScreen />
+      )}
     </>
   );
 }
 
 export default App;
 
-
+// {/* <GameCanvas gameOver={gameOver} setGameOver={setGameOver} /> : <EndScreen />} */}
 
   // function drawProjectile(
   //   ctx,

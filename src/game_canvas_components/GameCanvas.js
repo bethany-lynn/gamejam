@@ -57,7 +57,12 @@ export default function GameCanvas(props) {
       if (
         obstacleController.collideWith(bird)
       ) {
-        console.log("Game Over.")
+        props.setGameOver(true);
+        // setGameActive(false);
+        console.log("bird collided with obstacle");
+        console.log(`Game is stopped: ${gameStopped}`);
+        // console.log(`state of the game:  ${gameOver}`);
+        // console.log("Game Over.")
       }
 
       frameId = requestAnimationFrame(game);
@@ -65,7 +70,7 @@ export default function GameCanvas(props) {
 
     requestAnimationFrame(game);
     return () => cancelAnimationFrame(frameId);
-  }, []);
+  }, [Bird, ObstacleController, ProjectileController, TargetController, gameStopped]);
 
   return (
     <>

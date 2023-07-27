@@ -44,6 +44,16 @@ export default function useObstacleController(props) {
     draw(ctx, x, y, score) {
       const row = this.randomRow();
       this.spawn(x, (row * y) / 5 - this.offset, score);
+
+      if (!this.hasCollisionOccurred) {
+        const collisionDetected = this.collideWith({ x: x, y: y });
+
+        if (collisionDetected) {
+          this.hasCollisionOccurred = true;
+          props.setCollisionWithObstacle(true);
+        }
+      }
+
       this.obstacles.forEach((obstacle) => {
         if (this.isTargetOffScreen(obstacle)) {
           const index = this.obstacles.indexOf(obstacle);
