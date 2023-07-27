@@ -1,7 +1,7 @@
 import useObstacle from "./useObstacle";
 
 export default function useObstacleController(props) {
-  const { Obstacle, init } = useObstacle();
+  const { Obstacle, } = useObstacle();
 
   class ObstacleController {
     constructor(canvas) {
@@ -17,7 +17,6 @@ export default function useObstacleController(props) {
     async initObstacle() {
       const obstacle = new Obstacle(0, 200, 15); // Set initial x, y, and speed as needed
       await obstacle.init(); // Wait for the obstacle to be ready (image loaded)
-    //   await obstacle.loadFrames(ctx);
       this.obstacles.push(obstacle);
       this.ready = true;
     }
@@ -60,7 +59,7 @@ export default function useObstacleController(props) {
           const index = this.obstacles.indexOf(obstacle);
           this.obstacles.splice(index, 1);
         }
-        if (this.collideWith) obstacle.draw(ctx, obstacleLoopIndex);
+        obstacle.draw(ctx, obstacleLoopIndex);
       });
     }
 

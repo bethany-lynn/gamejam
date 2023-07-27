@@ -5,7 +5,7 @@ import useTargetController from "./custom_game_hooks/useTargetController";
 import useObstacleController from "./custom_game_hooks/useObstacleController";
 
 export default function GameCanvas(props) {
-  const [gameStopped, setGameStopped] = useState(false);
+  // const [gameStopped, setGameStopped] = useState(false);
   const [collisionWithObstacle, setCollisionWithObstacle] = useState(false);
 
   const canvasRef = useRef();
@@ -25,6 +25,7 @@ export default function GameCanvas(props) {
     let frameCount = 0; // assuming ~ 60 fps
     let birdLoopIndex = 0;
     let obstacleLoopIndex = 0; //aiming for 5 frames a second loop, 12 frames per cycle
+    let foodLoopIndex = 0;
 
     const targetController = new TargetController(canvas);
     const projectileController = new ProjectileController(canvas);
@@ -38,9 +39,10 @@ export default function GameCanvas(props) {
     function game() {
       frameCount++;
 
-      if (frameCount && frameCount % 12 == 0) {
+      if (frameCount && frameCount % 12 === 0) {
         birdLoopIndex += 1;
         obstacleLoopIndex += 1;
+        foodLoopIndex += 1;
       }
       if (birdLoopIndex > 2) {
         birdLoopIndex = 0;
@@ -48,13 +50,28 @@ export default function GameCanvas(props) {
       if (obstacleLoopIndex > 4) {
         obstacleLoopIndex = 0;
       }
+      if (foodLoopIndex > 1) {
+        foodLoopIndex = 0;
+      }
 
+      // console.log(`foodloopindex: ${foodLoopIndex}`)
       context.clearRect(0, 0, canvas.width, canvas.height);
 
       projectileController.draw(context);
       bird.draw(context, birdLoopIndex);
 
-      targetController.draw(context, canvas.width, (8 * canvas.height) / 9);
+      // console.log(`cannas width: ${canvas.width}`)
+
+      targetController.draw(
+        context,
+        1100,
+        ((8 * canvas.height) / 9),
+        foodLoopIndex
+      );
+
+      context.fillStyle = "rgba(225,225,225,0.5)";
+      context.fillRect(1100, 600, 64, 64)
+
       obstacleController.draw(
         context,
         canvas.width,
@@ -65,7 +82,7 @@ export default function GameCanvas(props) {
 
       targetController.targets.forEach((target) => {
         if (projectileController.collideWith(target)) {
-          console.log("collision logged");
+          console.log("hit a target");
           score += 1;
           props.setScore(score);
         }
@@ -81,7 +98,7 @@ export default function GameCanvas(props) {
         props.setGameOver(true);
         // setGameActive(false);
         console.log("bird collided with obstacle");
-        console.log(`Game is stopped: ${gameStopped}`);
+        // console.log(`Game is stopped: ${gameStopped}`);
         // console.log(`state of the game:  ${gameOver}`);
         // console.log("Game Over.")
       }
@@ -96,7 +113,7 @@ export default function GameCanvas(props) {
     ObstacleController,
     ProjectileController,
     TargetController,
-    gameStopped,
+    // gameStopped,
   ]);
 
   return (

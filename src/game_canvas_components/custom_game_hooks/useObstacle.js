@@ -57,7 +57,6 @@ export default function useObstacle() {
       this.x -= this.speed;
       ctx.fillRect(this.x, this.y, this.scaledWidth, this.scaledHeight);
       this.drawFrame(ctx, 5 + obstacleLoopIndex, 1, this.x, this.y)
-      // ctx.fillRect(this.x, this.y, 40, 40)
     }
 
     collideWith(sprite) {

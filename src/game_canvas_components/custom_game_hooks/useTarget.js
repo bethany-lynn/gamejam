@@ -1,14 +1,14 @@
 export default function useTarget(props) {
 
-  let balloonSheet = new Image();
-  balloonSheet.src = "/sprites/BalloonSprites.png";
+  let foodSheet = new Image();
+  foodSheet.src = "/sprites/foodiesBorderandBorderless.png";
 
   // A Promise to handle image loading
-  const imageLoadedPromise = new Promise((resolve, reject) => {
-    balloonSheet.onload = () => {
+  const foodSheetLoadedPromise = new Promise((resolve, reject) => {
+    foodSheet.onload = () => {
       resolve();
     };
-    balloonSheet.onerror = (error) => {
+    foodSheet.onerror = (error) => {
       reject(error);
       console.error("Error loading image:", error);
     };
@@ -19,13 +19,14 @@ export default function useTarget(props) {
       this.x = x;
       this.y = y;
       this.speed = speed;
-      this.scale = 2;
-      this.width = 40;
-      this.height = 40;
+      this.scale = 4;
+      this.width = 16;
+      this.height = 16;
       this.scaledWidth = this.scale * this.width;
       this.scaledHeight = this.scale * this.height;
-      this.spriteSheet = balloonSheet;
-      this.ready = false;      
+      this.spriteSheet = foodSheet;
+      this.ready = false;
+      this.init()      
     }
 
     drawFrame(ctx, frameX, frameY, canvasX, canvasY) {
@@ -44,10 +45,27 @@ export default function useTarget(props) {
       }
     }
 
-    draw(ctx) {
-      ctx.fillStyle = "yellow";
+    async init() {
+      try {
+        await foodSheetLoadedPromise; // Wait for the image to load
+        this.ready = true; // Set the 'ready' flag to true once the image is loaded
+      } catch (error) {
+        console.error("Error loading image:", error);
+      }
+    }
+
+    draw(ctx, foodLoopIndex) {
+      if(!this.ready) {
+        // console.log("helllllppppp")
+        return;
+      }
+      // console.log(this.ready)
+      ctx.fillStyle = "rgba(225,225,225,0.5)";
       this.x -= this.speed;
-      ctx.fillRect(this.x, this.y, this.width, this.height);
+      // console.log(`this.x: ${this.x}`)
+      ctx.fillRect(this.x, this.y, this.scaledWidth, this.scaledWidth);
+      this.drawFrame(ctx, 0, foodLoopIndex, this.x, this.y)
+      // console.log("target drawn")
     }
 
     collideWith(projectile) {
