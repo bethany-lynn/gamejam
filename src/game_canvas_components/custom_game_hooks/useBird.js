@@ -19,9 +19,11 @@ export default function useBird() {
       this.y = y;
       this.projectileController = projectileController;
       this.speed = 10;
-      this.scale = 2;
+      this.scale = 3;
       this.width = 32;
       this.height = 32;
+      this.maxHeight = 75;
+      this.minHeight = 600;
       this.scaledWidth = this.scale * this.width;
       this.scaledHeight = this.scale * this.height;
       this.spriteSheet = birdSheet;
@@ -62,7 +64,7 @@ export default function useBird() {
       ctx.strokeRect(this.x, this.y, this.scaledWidth, this.scaledHeight);
       ctx.fillStyle = "rgba(225,225,225,0.5)";
       ctx.fillRect(this.x, this.y, this.scaledWidth, this.scaledHeight);
-      this.drawFrame(ctx, obstacleLoopIndex, 3, this.x, this.y)
+      this.drawFrame(ctx, obstacleLoopIndex, 3, this.x, this.y);
       this.shoot();
     }
 
@@ -80,10 +82,14 @@ export default function useBird() {
 
     move() {
       if (this.downPressed) {
-        this.y += this.speed;
+        if (this.y < this.minHeight) {
+          this.y += this.speed;
+        }
       }
       if (this.upPressed) {
-        this.y -= this.speed;
+        if (this.y > this.maxHeight) {
+          this.y -= this.speed;
+        }
       }
     }
 
@@ -113,79 +119,3 @@ export default function useBird() {
   }
   return { Bird };
 }
-
-//   function drawBird(ctx, xBird, yBird) {
-//     ctx.fillStyle = "#ffffff";
-//     ctx.fillRect(xBird, yBird, 40, 40);
-//   }
-
-// birdWidth = 40
-// birdHeight = 40
-
-// export default class Bird {
-//     constructor(x, y, bulletController) {
-//       this.x = x;
-//       this.y = y;
-//       this.bulletController = bulletController;
-//       this.width = 40;
-//       this.height = 40;
-//       this.speed = 4;
-
-//       document.addEventListener("keydown", this.keydown);
-//       document.addEventListener("keyup", this.keyup);
-//     }
-
-//     draw(ctx) {
-//       this.move();
-//       ctx.strokeStyle = "yellow";
-//       ctx.strokeRect(this.x, this.y, this.width, this.height);
-//       ctx.fillStyle = "black";
-//       ctx.fillRect(this.x, this.y, this.width, this.height);
-
-//       this.shoot();
-//     }
-
-//     shoot() {
-//       if (this.shootPressed) {
-//         const speed = 5;
-//         const delay = 7;
-//         const damage = 1;
-//         const bulletX = this.x + this.width / 2;
-//         const bulletY = this.y;
-//         this.bulletController.shoot(bulletX, bulletY, speed, damage, delay);
-//       }
-//     }
-
-//     move() {
-//       if (this.downPressed) {
-//         this.y += this.speed;
-//       }
-//       if (this.upPressed) {
-//         this.y -= this.speed;
-//       }
-//     }
-
-//     keydown = (e) => {
-//       if (e.code === "ArrowUp") {
-//         this.upPressed = true;
-//       }
-//       if (e.code === "ArrowDown") {
-//         this.downPressed = true;
-//       }
-//       if (e.code === "Space") {
-//         this.shootPressed = true;
-//       }
-//     };
-
-//     keyup = (e) => {
-//       if (e.code === "ArrowUp") {
-//         this.upPressed = false;
-//       }
-//       if (e.code === "ArrowDown") {
-//         this.downPressed = false;
-//       }
-//       if (e.code === "Space") {
-//         this.shootPressed = false;
-//       }
-//     };
-//   }
