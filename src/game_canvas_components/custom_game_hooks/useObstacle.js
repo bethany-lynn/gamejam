@@ -14,7 +14,6 @@ export default function useObstacle() {
   const imageLoadedPromise = new Promise((resolve, reject) => {
     balloonSheet.onload = () => {
       resolve();
-      console.log("image loaded")
     };
     balloonSheet.onerror = (error) => {
       reject(error);
@@ -29,7 +28,7 @@ export default function useObstacle() {
       this.speed = speed;
       this.scale = 4.5;
       this.width = 22.4; // 224px across / 10 columns
-      this.height = 44; // 132px down / 3 rows
+      this.height = 44.5; // 132px down / 3 rows
       this.scaledWidth = this.scale * this.width;
       this.scaledHeight = this.scale * this.height;
       this.spriteSheet = balloonSheet;
@@ -62,7 +61,7 @@ export default function useObstacle() {
       ctx.fillStyle = 'rgba(225,225,225,0.5)';
       this.x -= this.speed;
       ctx.fillRect(this.x, this.y, this.scaledWidth, this.scaledHeight);
-      this.drawFrame(ctx, 9, 2, this.x, this.y);
+      this.drawFrame(ctx, 9, 1, this.x, this.y);
       // ctx.fillRect(this.x, this.y, 40, 40)
     }
 

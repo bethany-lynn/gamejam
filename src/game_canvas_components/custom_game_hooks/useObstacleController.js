@@ -23,10 +23,10 @@ export default function useObstacleController(props) {
 
     //method for generating targets with some randomness in delay between spawns
 
-    spawn(x, y) {
+    spawn(x, y, score) {
       if (this.ready) {
         if (!this.hasCollisionOccurred) {
-          let speed = 15;
+          let speed = 10 + (score / 5);
           let delay = Math.random() * 120;
 
           if (this.timerTillNextObstacle <= 0) {
@@ -41,9 +41,9 @@ export default function useObstacleController(props) {
       }
     }
 
-    draw(ctx, x, y) {
+    draw(ctx, x, y, score) {
       const row = this.randomRow();
-      this.spawn(x, (row * y) / 7 - this.offset);
+      this.spawn(x, (row * y) / 5 - this.offset, score);
       this.obstacles.forEach((obstacle) => {
         if (this.isTargetOffScreen(obstacle)) {
           const index = this.obstacles.indexOf(obstacle);

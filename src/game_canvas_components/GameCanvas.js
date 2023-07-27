@@ -38,7 +38,7 @@ export default function GameCanvas(props) {
       bird.draw(context);
 
       targetController.draw(context, canvas.width, (8 * canvas.height) / 9);
-      obstacleController.draw(context, canvas.width, canvas.height);
+      obstacleController.draw(context, canvas.width, canvas.height, score);
 
       targetController.targets.forEach((target) => {
         if (projectileController.collideWith(target)) {
@@ -48,14 +48,16 @@ export default function GameCanvas(props) {
         }
       });
 
+      obstacleController.obstacles.forEach((obstacle) => {
+        if (projectileController.collideWith(obstacle)) {
+          console.log("hit a balloon")
+        }
+      })
+
       if (
         obstacleController.collideWith(bird)
       ) {
-        // props.setGameOver(true);
-        // setGameActive(false);
-        console.log("bird collided with obstacle");
-        console.log(`Game is stopped: ${gameStopped}`);
-        // console.log(`state of the game:  ${gameOver}`);
+        console.log("Game Over.")
       }
 
       frameId = requestAnimationFrame(game);
