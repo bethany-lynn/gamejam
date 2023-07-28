@@ -4,6 +4,8 @@ import GameWrapper from "./ui_components/GameWrapper";
 import StartScreen from "./ui_components/StartScreen";
 import React, { useState } from "react";
 
+// Top level component in DOM where the game components are rendered 
+
 function App(props) {
   const [gameOver, setGameOver] = useState(true);
   const [gameStarted, setGameStarted] = useState(false); // access state value, current and updated

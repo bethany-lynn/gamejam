@@ -1,5 +1,8 @@
 import useProjectile from "./useProjectile.js";
 
+// A controller class for the projectiles to be used on the canvas
+// Methods for frequency of each draw, adding and removing from an array, and tracking collision with targets
+
 export default function useProjectileController() {
   const { Projectile } = useProjectile();
 

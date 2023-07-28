@@ -1,5 +1,7 @@
 import './StartScreen.css';
 
+// Component for rendering a Start Screen when game is initially opened, with button to start gameplay
+
 export default function StartScreen({ onStartGame }) {
     return (
         <div className='StartScreen'>

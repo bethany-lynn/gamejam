@@ -1,5 +1,7 @@
 import useTarget from "./useTarget";
 
+// Using canvas to implement methods for drawing, spawning, and colliding the targets with projectiles
+
 export default function useTargetController() {
   const { Target } = useTarget();
 

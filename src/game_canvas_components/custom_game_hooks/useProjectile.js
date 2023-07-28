@@ -2,6 +2,9 @@ export default function useProjectile() {
   let projectileSheet = new Image();
   projectileSheet.src = "/sprites/projectileSheet.png";
 
+  // A class for instantiating attributes to the projectile object
+  // Use of draw methods only, no sprite sheets
+
   // A Promise to handle image loading
   const projectileSheetLoadedPromise = new Promise((resolve, reject) => {
     projectileSheet.onload = () => {

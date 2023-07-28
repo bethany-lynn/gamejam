@@ -2,6 +2,8 @@ import GameCanvas from "../game_canvas_components/GameCanvas";
 import Parallax from './Parallax';
 import './GameWrapper.css';
 
+// Component to hold canvas and parallax background for proper styling
+
 export default function GameWrapper(props) {
     return (
         <div className="game-wrapper">
