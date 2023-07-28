@@ -29,6 +29,8 @@ export default function useProjectile() {
       this.color = "purple";
     }
 
+    // short hand method for longer canvas drawImage method, allowing
+    // for sprite animation
     drawFrame(ctx, frameX, frameY, canvasX, canvasY) {
       if (this.ready) {
         ctx.drawImage(

@@ -46,12 +46,14 @@ export default function useBird() {
       document.addEventListener("keyup", this.keyup);
     }
 
+    // makes sure the sprite sheet is loaded before trying to draw
     async initBird() {
-      // makes sure the sprite sheet is loaded before trying to draw
       await birdSheetLoadedPromise;
       this.ready = true;
     }
 
+    // short hand method for longer canvas drawImage method, allowing
+    // for sprite animation
     drawFrame(ctx, frameX, frameY, canvasX, canvasY) {
       if (this.ready) {
         ctx.drawImage(

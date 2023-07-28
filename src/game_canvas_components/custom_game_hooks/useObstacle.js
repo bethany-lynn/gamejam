@@ -34,6 +34,8 @@ export default function useObstacle() {
       this.frameY = Math.floor(Math.random() * this.spriteSets);
     }
 
+    // short hand method for longer canvas drawImage method, allowing
+    // for sprite animation
     drawFrame(ctx, frameX, frameY, canvasX, canvasY) { // method for drawing specific frame
       if (this.ready) { // checks if promise is good - image is loaded from sheet
         ctx.drawImage( // actual drawing happening

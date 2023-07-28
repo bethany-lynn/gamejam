@@ -30,6 +30,8 @@ export default function usePoof(props) {
       this.init();
     }
 
+    // short hand method for longer canvas drawImage method, allowing
+    // for sprite animation
     drawFrame(ctx, frameX, frameY, canvasX, canvasY) {
       if (this.ready) {
         ctx.drawImage(
