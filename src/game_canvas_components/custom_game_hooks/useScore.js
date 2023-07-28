@@ -4,7 +4,7 @@ export default function useScore() {
         constructor() {
             this.x = 1050;
             this.y = 50;
-            this.width = 110
+            this.width = 60
             this.height = 80
             this.score = 0;
         }
@@ -14,7 +14,10 @@ export default function useScore() {
         }
 
         draw(ctx) {
-            ctx.fillStyle = "rgba(225,225,225,0.5)";
+            if (this.score > 9 && this.width === 60) {
+                this.width += 55;
+            }
+            ctx.fillStyle = "rgba(225,225,225,0.8)";
             ctx.fillRect(this.x, this.y, this.width, this.height);
             ctx.fillStyle = "pink";
             ctx.font = "90px Arial";
