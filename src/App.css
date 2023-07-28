@@ -1,5 +1,13 @@
-.birdCanvas {
-    background: linear-gradient(90deg, red, blue);
+.app-wrapper {
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
     display: block;
-    margin: 0 auto;
+    width: 1200px;
+}
+
+h1, h2 {
+    display: block;
+    text-align: center;
 }

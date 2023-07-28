@@ -3,6 +3,8 @@ import useBird from "./custom_game_hooks/useBird";
 import useProjectileController from "./custom_game_hooks/useProjectileController";
 import useTargetController from "./custom_game_hooks/useTargetController";
 import useObstacleController from "./custom_game_hooks/useObstacleController";
+import './GameCanvas.css';
+
 
 //parallax background
 // import bgLayer1 from '../images/backtrees.png'
@@ -46,39 +48,6 @@ export default function GameCanvas(props) {
 
   let score = 0;
 
-
-  // new useEffect for parallax
-  // useEffect(() => {
-  //   // Load layers/images when component mounts
-  //   const loadParallaxBgLayers = () => {
-  //     const imageSources = [bgLayer1, bgLayer2, bgLayer3, bgLayer4];
-  //     const loadedLayers = [];
-
-  //     const loadImage = (src) => {
-  //       return new Promise((resolve, reject) => {
-  //         const img = new Image();
-  //         img.onload = () => resolve(img);
-  //         img.onerror = (error) => reject(error);
-  //         img.src = src;
-  //       });
-  //     };
-
-  //     Promise.all(imageSources.map((src) => loadImage(src)))
-  //       .then((images) => {
-  //         // All images loaded successfully
-  //         images.forEach((img) => {
-  //           loadedLayers.push(img);
-  //         });
-  //         setBgLayers(loadedLayers);
-  //       })
-  //       .catch((error) => {
-  //         console.error("Error loading parallax background layers:", error);
-  //       });
-  //   };
-
-  //   loadParallaxBgLayers();
-  // }, []);
-
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
@@ -96,13 +65,6 @@ export default function GameCanvas(props) {
     function game() {
       context.clearRect(0, 0, canvas.width, canvas.height);
 
-      // // parallax
-      // BgLayers.forEach((layer, index) => {
-      //   context.drawImage(layer, layerOffsets[index], 0);
-      // });
-      // //
-
-
       projectileController.draw(context);
       bird.draw(context);
 
@@ -113,7 +75,7 @@ export default function GameCanvas(props) {
         if (projectileController.collideWith(target)) {
           console.log("collision logged");
           score += 1;
-          props.setScore(score);
+          // props.setScore(score);
         }
       });
 
@@ -129,7 +91,7 @@ export default function GameCanvas(props) {
         props.setGameOver(true);
         // setGameActive(false);
         console.log("bird collided with obstacle");
-        console.log(`Game is stopped: ${gameStopped}`);
+        // console.log(`Game is stopped: ${gameStopped}`);
         // console.log(`state of the game:  ${gameOver}`);
         // console.log("Game Over.")
       }

@@ -21,7 +21,7 @@ export default function useBird() {
       ctx.strokeRect(this.x, this.y, this.width, this.height);
       ctx.fillStyle = "black";
       ctx.fillRect(this.x, this.y, this.width, this.height);
-
+      // console.log(this.x, this.y);
       this.shoot();
     }
 

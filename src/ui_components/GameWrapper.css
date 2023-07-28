@@ -1,0 +1,10 @@
+.game-wrapper {
+    position: relative;
+    /* margin: auto; */
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.game-wrapper > * {
+    position: absolute;
+}

@@ -1,9 +1,7 @@
-// App.js
-
 import "./App.css";
 import EndScreen from "./ui_components/EndScreen";
+import GameWrapper from "./ui_components/GameWrapper";
 import StartScreen from "./ui_components/StartScreen";
-import GameCanvas from "./game_canvas_components/GameCanvas";
 import React, { useState } from "react";
 
 function App(props) {
@@ -17,14 +15,12 @@ function App(props) {
     }
   };
 
-
   // initialize and reset/start blank variable states
   const handleStartGame = () => { // start game with state of 3 variables
     setScore(0);
     setGameOver(false);
     setGameStarted(true);
   };
-
 
   // restart the game after game over and reset score
   const handleRestartGame = () => {
@@ -33,13 +29,13 @@ function App(props) {
   };
 
   return (
-    <>
+    <div className="app-wrapper">
       {gameStarted ? (
         <>
           <h1>hello birdies</h1>
           <h2>{score}</h2>
           {!gameOver ? (
-            <GameCanvas
+            <GameWrapper
               gameOver={gameOver}
               setGameOver={setGameOver}
               setCollisionWithObstacle={detectCollisionWithObstacle}
@@ -52,7 +48,7 @@ function App(props) {
       ) : (
         <StartScreen onStartGame={handleStartGame} /> // handleStartGame function as prop for component and called when button clicked
       )}
-    </>
+    </div>
   );
 }
 

@@ -1,7 +1,7 @@
 import useObstacle from "./useObstacle";
 
 export default function useObstacleController(props) {
-  const { Obstacle, init } = useObstacle();
+  const { Obstacle } = useObstacle();
 
   class ObstacleController {
     constructor(canvas) {
@@ -22,7 +22,7 @@ export default function useObstacleController(props) {
     }
 
     //method for generating targets with some randomness in delay between spawns
-
+    // balloons
     spawn(x, y, score) {
       if (this.ready) {
         if (!this.hasCollisionOccurred) {
@@ -45,14 +45,14 @@ export default function useObstacleController(props) {
       const row = this.randomRow();
       this.spawn(x, (row * y) / 5 - this.offset, score);
 
-      if (!this.hasCollisionOccurred) {
-        const collisionDetected = this.collideWith({ x: x, y: y });
+      // if (!this.hasCollisionOccurred) {
+      //   const collisionDetected = this.collideWith({ x: x, y: y });
 
-        if (collisionDetected) {
-          this.hasCollisionOccurred = true;
-          props.setCollisionWithObstacle(true);
-        }
-      }
+      //   if (collisionDetected) {
+      //     this.hasCollisionOccurred = true;
+      //     props.setCollisionWithObstacle(true);
+      //   }
+      // }
 
       this.obstacles.forEach((obstacle) => {
         if (this.isTargetOffScreen(obstacle)) {
@@ -72,6 +72,10 @@ export default function useObstacleController(props) {
       if (!this.hasCollisionOccurred) {
         const collisionDetected = this.obstacles.some((obstacle) => {
           if (obstacle.collideWith(sprite)) {
+            console.log(`obstacle x: ${obstacle.x}`);
+            console.log(`obstacle y: ${obstacle.y}`);
+            console.log(`bird x: ${sprite.x}`);
+            console.log(`bird y: ${sprite.y}`);
             return true;
           }
           return false;
@@ -83,7 +87,6 @@ export default function useObstacleController(props) {
           return true;
         }
       }
-
       return false;
     }
 
