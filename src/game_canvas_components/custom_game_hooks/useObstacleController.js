@@ -41,7 +41,7 @@ export default function useObstacleController(props) {
       }
     }
 
-    draw(ctx, x, y, score) {
+    draw(ctx, x, y, score, obstacleLoopIndex) {
       const row = this.randomRow();
       this.spawn(x, (row * y) / 5 - this.offset, score);
 
@@ -59,7 +59,7 @@ export default function useObstacleController(props) {
           const index = this.obstacles.indexOf(obstacle);
           this.obstacles.splice(index, 1);
         }
-        if (this.collideWith) obstacle.draw(ctx);
+        obstacle.draw(ctx, obstacleLoopIndex);
       });
     }
 
@@ -83,7 +83,7 @@ export default function useObstacleController(props) {
 
         if (collisionDetected) {
           this.hasCollisionOccurred = true;
-          props.setCollisionWithObstacle(true);
+        //   props.setCollisionWithObstacle(true);
           return true;
         }
       }
@@ -91,7 +91,7 @@ export default function useObstacleController(props) {
     }
 
     isTargetOffScreen(obstacle) {
-      return obstacle.x <= -obstacle.width;
+      return obstacle.x <= -2*obstacle.width;
     }
   }
 

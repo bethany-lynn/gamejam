@@ -6,22 +6,28 @@ import useObstacleController from "./custom_game_hooks/useObstacleController";
 import './GameCanvas.css';
 
 export default function GameCanvas(props) {
-  const [gameStopped, setGameStopped] = useState(false);
-  const [collisionWithObstacle, setCollisionWithObstacle] = useState(false);
+  // const [gameStopped, setGameStopped] = useState(false);
+  // const [collisionWithObstacle, setCollisionWithObstacle] = useState(false);
+  const [collidedTarget, setCollidedTarget] = useState(null);
 
   const canvasRef = useRef();
 
   let { Bird } = useBird();
   let { ProjectileController } = useProjectileController();
   let { TargetController } = useTargetController();
-  let { ObstacleController } = useObstacleController({ setCollisionWithObstacle });
+  let { ObstacleController } = useObstacleController(
+    // {setCollisionWithObstacle,}
+  );
 
   let score = 0;
 
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
-    let frameId;
+    let frameCount = 0; // assuming ~ 60 fps
+    let birdLoopIndex = 0;
+    let obstacleLoopIndex = 0; //aiming for 5 frames a second loop, 12 frames per cycle
+    let foodLoopIndex = 0;
 
     const targetController = new TargetController(canvas);
     const projectileController = new ProjectileController(canvas);
@@ -33,45 +39,97 @@ export default function GameCanvas(props) {
     );
 
     function game() {
+      frameCount++;
+
+      if (frameCount && frameCount % 12 === 0) {
+        birdLoopIndex += 1;
+        obstacleLoopIndex += 1;
+        foodLoopIndex += 1;
+      }
+      if (birdLoopIndex > 2) {
+        birdLoopIndex = 0;
+      }
+      if (obstacleLoopIndex > 4) {
+        obstacleLoopIndex = 0;
+      }  
+      if (foodLoopIndex > 1) {
+        foodLoopIndex = 0;
+      }
+
+      // console.log(`foodloopindex: ${foodLoopIndex}`)
       context.clearRect(0, 0, canvas.width, canvas.height);
 
       projectileController.draw(context);
-      bird.draw(context);
+      bird.draw(context, birdLoopIndex);
 
-      targetController.draw(context, canvas.width, (8 * canvas.height) / 9);
-      obstacleController.draw(context, canvas.width, canvas.height, score);
+      // console.log(`cannas width: ${canvas.width}`)
+
+      targetController.draw(
+        context,
+        1100,
+        ((8 * canvas.height) / 9),
+        foodLoopIndex
+      );
+
+      context.fillStyle = "rgba(225,225,225,0.5)";
+      context.fillRect(1100, 600, 64, 64)
+
+      obstacleController.draw(
+        context,
+        canvas.width,
+        canvas.height,
+        score,
+        obstacleLoopIndex
+      );
 
       targetController.targets.forEach((target) => {
         if (projectileController.collideWith(target)) {
-          console.log("collision logged");
+          console.log("hit a target");
           score += 1;
+          // setCollidedTarget(target); // Store the collided target
           // props.setScore(score);
         }
       });
 
       obstacleController.obstacles.forEach((obstacle) => {
         if (projectileController.collideWith(obstacle)) {
-          console.log("hit a balloon")
+          console.log("hit a balloon");
         }
-      })
+      });
 
-      if (
-        obstacleController.collideWith(bird)
-      ) {
+      if (obstacleController.collideWith(bird)) {
         props.setGameOver(true);
-        // setGameActive(false);
         console.log("bird collided with obstacle");
         // console.log(`Game is stopped: ${gameStopped}`);
         // console.log(`state of the game:  ${gameOver}`);
         // console.log("Game Over.")
       }
 
-      frameId = requestAnimationFrame(game);
+      requestAnimationFrame(game);
     }
 
     requestAnimationFrame(game);
-    return () => cancelAnimationFrame(frameId);
-  }, [Bird, ObstacleController, ProjectileController, TargetController, gameStopped]);
+    // return () => cancelAnimationFrame(frameId);
+  }, [
+    Bird,
+    ObstacleController,
+    ProjectileController,
+    TargetController,
+    // gameStopped,
+  ]);
+
+    // Handle collision after the game loop is completed
+    useEffect(() => {
+      if (collidedTarget) {
+        // Update the score and handle other actions
+        props.setScore((score) => score + 1);
+        // Perform any other actions based on the collision, e.g., removing the target
+        // and handling game over conditions
+  
+        // Reset the collidedTarget state to null after processing the collision
+        setCollidedTarget(null);
+      }
+    }, [collidedTarget]);
 
   return (
     <>
