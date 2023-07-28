@@ -22,6 +22,10 @@ export default function GameCanvas(props) {
   const scoreRef = useRef(0);
 
   useEffect(() => {
+    ////////////////
+    // Canvas & Animation variables
+    ////////////////
+
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
     let frameCount = 0; // assuming ~ 60 fps
@@ -31,6 +35,10 @@ export default function GameCanvas(props) {
     let projectileLoopIndex = 0;
     let poofLoopIndex = 0;
     let render = true;
+
+    ////////////////
+    // Instantiate the things!
+    ////////////////
 
     const targetController = new TargetController(canvas);
     const poofController = new PoofController(canvas);
@@ -43,21 +51,15 @@ export default function GameCanvas(props) {
       projectileController
     );
 
-    // function debug(msg) {
-    //   console.debug(msg, {
-    //     bird: {
-    //       x: bird.x,
-    //       y: bird.y,
-    //       widthX: bird.x + bird.width,
-    //       heightY: bird.y + bird.height,
-    //     },
-    //     obstacles: obstacleController.obstacles.map(
-    //       ({ x, y, width, height }) => ({ x, y, width, height })
-    //     ),
-    //   });
-    // }
+    ////////////////
+    // Game Loop
+    ////////////////
 
     function game() {
+      ////////////////
+      // managing variables for sprite animation loops
+      ////////////////
+
       frameCount++;
 
       if (frameCount && frameCount % 12 === 0) {
@@ -84,12 +86,13 @@ export default function GameCanvas(props) {
         projectileLoopIndex = 1;
       }
 
-      // if (updateAndRedraw.current) {
-      //   console.count("update");
-      //   debug("before");
+      ////////////////
+      // running draw methods to update canvas every frame
+      ////////////////
+
       context.clearRect(0, 0, canvas.width, canvas.height);
 
-      score.draw(context)
+      score.draw(context);
 
       projectileController.draw(context, projectileLoopIndex);
 
@@ -112,10 +115,14 @@ export default function GameCanvas(props) {
         obstacleLoopIndex
       );
 
+      ////////////////
+      // running collision methods to check each frame after draw
+      ////////////////
+
       projectileController.projectiles.forEach((projectile) => {
         if (targetController.collideWith(projectile)) {
           poofController.spawn(projectile.x, projectile.y);
-          scoreVar ++;
+          scoreVar++;
           score.updateScore();
         }
       });
@@ -124,17 +131,17 @@ export default function GameCanvas(props) {
         if (projectileController.collideWith(obstacle)) {
         }
       });
-      //   debug("after");
-      //   updateAndRedraw.current = false;
-      // }
 
       if (obstacleController.collideWith(bird)) {
         props.setGameOver(true);
         render = false;
       }
 
+      // RAF to set frame rate
       if (render) {
         requestAnimationFrame(game);
+      } else {
+        cancelAnimationFrame(game);
       }
     }
 
@@ -143,16 +150,9 @@ export default function GameCanvas(props) {
 
   return (
     <>
-      <h2 className="score-box">{scoreRef.current}</h2>
       <canvas className="birdCanvas" width="1200" height="675" ref={canvasRef}>
         Lil Bird Game!
       </canvas>
-      {/* <button
-        onClick={() => (updateAndRedraw.current = true)}
-        style={{ marginTop: "-20px" }}
-      >
-        Advance
-      </button> */}
     </>
   );
 }

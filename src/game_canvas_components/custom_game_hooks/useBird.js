@@ -1,6 +1,9 @@
 export default function useBird() {
   let birdSheet = new Image();
   let birdChoice = Math.floor(Math.random() * 3);
+
+  // picks one of 3 birds to use as the sprite
+
   if (birdChoice === 0) {
     birdSheet.src = "/sprites/bird_1_bluejay.png";
   } if (birdChoice === 1) {
@@ -44,6 +47,7 @@ export default function useBird() {
     }
 
     async initBird() {
+      // makes sure the sprite sheet is loaded before trying to draw
       await birdSheetLoadedPromise;
       this.ready = true;
     }
@@ -77,8 +81,6 @@ export default function useBird() {
       this.shoot();
     }
 
-    // methods responding to keypress - interactive elements
-
     shoot() {
       if (this.shootPressed) {
         const speed = 15;
@@ -88,6 +90,8 @@ export default function useBird() {
         this.projectileController.shoot(projectileX, projectileY, speed, delay);
       }
     }
+    
+    // methods responding to keypress - interactive elements
 
     move() {
       if (this.downPressed) {
