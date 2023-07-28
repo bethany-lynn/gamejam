@@ -5,7 +5,6 @@ export default function useProjectile() {
   // A Promise to handle image loading
   const projectileSheetLoadedPromise = new Promise((resolve, reject) => {
     projectileSheet.onload = () => {
-      console.log("sheet loaded")
       resolve();
     };
     projectileSheet.onerror = (error) => {
@@ -53,11 +52,8 @@ export default function useProjectile() {
 
     draw(ctx, projectileLoopIndex) {
       if (this.ready) {
-        // ctx.fillStyle = "rgba(225,225,225,0.5)";
-        this.y += this.speed;
-        // ctx.fillRect(this.x, this.y, this.width, this.height);
+        this.y += this.speed;;
         this.drawFrame(ctx, projectileLoopIndex, 0, this.x, this.y)
-        // console.log("poop frame drawn")
       }
     }
 
@@ -68,7 +64,6 @@ export default function useProjectile() {
         this.y < sprite.y + sprite.height &&
         this.y + this.height > sprite.y
       ) {
-        // sprite.takeDamage(this.damage);
         return true;
       }
       return false;

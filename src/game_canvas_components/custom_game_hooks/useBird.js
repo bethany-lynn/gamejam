@@ -62,7 +62,6 @@ export default function useBird() {
         return;
       }
       this.move();
-      console.log(`this.y ${this.y}`)
       ctx.strokeStyle = "transparent";
       ctx.strokeRect(this.x, this.y, this.scaledWidth, this.scaledHeight);
       ctx.fillStyle = "transparent";

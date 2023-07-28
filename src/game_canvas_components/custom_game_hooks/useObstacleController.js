@@ -63,10 +63,6 @@ export default function useObstacleController(props) {
       if (!this.hasCollisionOccurred) {
         const collisionDetected = this.obstacles.some((obstacle) => {
           if (obstacle.collideWith(sprite)) {
-            console.log(`obstacle x: ${obstacle.x}`);
-            console.log(`obstacle y: ${obstacle.y}`);
-            console.log(`bird x: ${sprite.x}`);
-            console.log(`bird y: ${sprite.y}`);
             return true;
           }
           return false;

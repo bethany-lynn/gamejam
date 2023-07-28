@@ -116,25 +116,12 @@ export default function GameCanvas(props) {
         if (targetController.collideWith(projectile)) {
           poofController.spawn(projectile.x, projectile.y);
           scoreVar ++;
-          console.log(`score: ${scoreVar}`);
           score.updateScore();
-          // scoreRef.current = scoreVar;
-          // setScore(scoreVar)
-          console.log("goodbye target animation");
         }
       });
 
-      // targetController.targets.forEach((target) => {
-      //   if (projectileController.collideWith(target)) {
-      //     console.log("hit a target");
-      //     // setCollidedTarget(target); // Store the collided target
-      //     // props.setScore(score);
-      //   }
-      // });
-
       obstacleController.obstacles.forEach((obstacle) => {
         if (projectileController.collideWith(obstacle)) {
-          console.log("hit a balloon");
         }
       });
       //   debug("after");
@@ -144,7 +131,6 @@ export default function GameCanvas(props) {
       if (obstacleController.collideWith(bird)) {
         props.setGameOver(true);
         render = false;
-        console.log("bird collided with obstacle");
       }
 
       if (render) {

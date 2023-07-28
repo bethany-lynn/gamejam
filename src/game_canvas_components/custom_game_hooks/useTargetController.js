@@ -17,7 +17,6 @@ export default function useTargetController() {
       await target.init(); // Wait for the target to be ready (image loaded)
       this.targets.push(target);
       this.ready = true;
-      console.log("controller init complete");
     }
 
     //method for generating targets with some randomness in delay between spawns
