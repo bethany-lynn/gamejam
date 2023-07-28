@@ -18,7 +18,7 @@ export default function useBird() {
       this.x = x;
       this.y = y;
       this.projectileController = projectileController;
-      this.speed = 10;
+      this.speed = 12;
       this.scale = 3;
       this.width = 32;
       this.height = 32;
@@ -29,7 +29,7 @@ export default function useBird() {
       this.spriteSheet = birdSheet;
       this.ready = false;
       this.maxHeight = 35;
-      this.minHeight = 525;
+      this.minHeight = 470;
       this.initBird();
 
       document.addEventListener("keydown", this.keydown);
@@ -62,6 +62,7 @@ export default function useBird() {
         return;
       }
       this.move();
+      console.log(`this.y ${this.y}`)
       ctx.strokeStyle = "transparent";
       ctx.strokeRect(this.x, this.y, this.scaledWidth, this.scaledHeight);
       ctx.fillStyle = "transparent";
@@ -77,7 +78,7 @@ export default function useBird() {
         const speed = 15;
         const delay = 15;
         const projectileX = this.x + this.width / 4;
-        const projectileY = this.y;
+        const projectileY = this.y + 24;
         this.projectileController.shoot(projectileX, projectileY, speed, delay);
       }
     }
