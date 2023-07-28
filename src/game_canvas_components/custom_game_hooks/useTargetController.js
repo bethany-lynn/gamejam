@@ -13,7 +13,7 @@ export default function useTargetController() {
     }
 
     async initTarget() {
-      const target = new Target(1200, 600, 15); // Set initial x, y, and speed as needed
+      const target = new Target(1200, 600, 1200); // Set initial x, y, and speed as needed
       await target.init(); // Wait for the target to be ready (image loaded)
       this.targets.push(target);
       this.ready = true;
