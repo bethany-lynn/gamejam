@@ -1,6 +1,13 @@
 export default function useBird() {
   let birdSheet = new Image();
-  birdSheet.src = "/sprites/bird_3_robin.png";
+  let birdChoice = Math.floor(Math.random() * 3);
+  if (birdChoice === 0) {
+    birdSheet.src = "/sprites/bird_1_bluejay.png";
+  } if (birdChoice === 1) {
+    birdSheet.src = "/sprites/bird_2_cardinal.png";
+  } if (birdChoice === 2) {
+    birdSheet.src = "/sprites/bird_3_robin.png";
+  }
 
   // A Promise to handle image loading
   const birdSheetLoadedPromise = new Promise((resolve, reject) => {
