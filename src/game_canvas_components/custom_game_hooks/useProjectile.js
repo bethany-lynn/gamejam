@@ -1,33 +1,64 @@
 export default function useProjectile() {
-  class Projectile {
-    //   colors = [
-    //     "red",
-    //     "blue",
-    //     "red",
-    //     "green",
-    //     "yellow",
-    //     "orange",
-    //     "purple",
-    //     "pink",
-    //     "brown",
-    //     "grey",
-    //   ];
+  let projectileSheet = new Image();
+  projectileSheet.src = "/sprites/projectileSheet.png";
 
+  // A Promise to handle image loading
+  const projectileSheetLoadedPromise = new Promise((resolve, reject) => {
+    projectileSheet.onload = () => {
+      console.log("sheet loaded")
+      resolve();
+    };
+    projectileSheet.onerror = (error) => {
+      reject(error);
+      console.error("Error loading image:", error);
+    };
+  });
+
+  class Projectile {
     constructor(x, y, speed) {
       this.x = x;
       this.y = y;
       this.speed = speed;
-
+      this.scale = 1;
       this.width = 20;
       this.height = 20;
+      this.scaledWidth = this.scale * this.width;
+      this.scaledHeight = this.scale * this.height;
+      this.spriteSheet = projectileSheet;
+      this.ready = false;
+      this.init();
       this.color = "purple";
-      // this.color = this.colors[Math.floor(Math.random() * this.colors.length)];
     }
 
-    draw(ctx) {
-      ctx.fillStyle = this.color;
-      this.y += this.speed;
-      ctx.fillRect(this.x, this.y, this.width, this.height);
+    drawFrame(ctx, frameX, frameY, canvasX, canvasY) {
+      if (this.ready) {
+        ctx.drawImage(
+          this.spriteSheet,
+          frameX * this.width,
+          frameY * this.height,
+          this.width,
+          this.height,
+          canvasX,
+          canvasY,
+          this.scaledWidth,
+          this.scaledHeight
+        );
+      }
+    }
+
+    async init() {
+      await projectileSheetLoadedPromise;
+      this.ready = true;
+    }
+
+    draw(ctx, projectileLoopIndex) {
+      if (this.ready) {
+        ctx.fillStyle = "rgba(225,225,225,0.5)";
+        this.y += this.speed;
+        ctx.fillRect(this.x, this.y, this.width, this.height);
+        this.drawFrame(ctx, projectileLoopIndex, 0, this.x, this.y)
+        console.log("poop frame drawn")
+      }
     }
 
     collideWith(sprite) {
@@ -43,5 +74,5 @@ export default function useProjectile() {
       return false;
     }
   }
-  return { Projectile }
+  return { Projectile };
 }

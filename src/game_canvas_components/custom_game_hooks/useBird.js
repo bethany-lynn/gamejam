@@ -23,7 +23,7 @@ export default function useBird() {
       this.width = 32;
       this.height = 32;
       this.maxHeight = 75;
-      this.minHeight = 600;
+      this.minHeight = 650;
       this.scaledWidth = this.scale * this.width;
       this.scaledHeight = this.scale * this.height;
       this.spriteSheet = birdSheet;

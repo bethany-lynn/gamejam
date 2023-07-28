@@ -64,7 +64,7 @@ export default function useObstacleController(props) {
     }
 
     randomRow() {
-      let numRow = 6;
+      let numRow = 4;
       return Math.floor(Math.random() * numRow) + 1;
     }
 
