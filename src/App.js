@@ -16,7 +16,6 @@ function App(props) {
     setGameStarted(true);
   };
 
-  // restart the game after game over and reset score
   const handleRestartGame = () => {
     setScore(0);
     setGameOver(false);
@@ -26,7 +25,6 @@ function App(props) {
     <div className="app-wrapper">
       {gameStarted ? (
         <>
-          <h1>hello birdies</h1>
           {!gameOver ? (
             <GameWrapper
               gameOver={gameOver}

@@ -1,0 +1,35 @@
+.StartScreen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+}
+
+.game-description {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#button {
+    padding: 50px 70px;
+    font-family: 'Handjet', cursive;
+    font-size: 40px;
+    background-color: #027509;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#button:hover {
+    background-color: #0f1d0a;
+}
+
+#button:focus {
+    outline: none;
+}

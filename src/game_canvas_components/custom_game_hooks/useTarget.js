@@ -1,6 +1,6 @@
 export default function useTarget(props) {
 
-  let foodSheet = new Image();
+  const foodSheet = new Image();
   foodSheet.src = "/sprites/foodiesBorderandBorderless.png";
 
   // A Promise to handle image loading
@@ -26,6 +26,9 @@ export default function useTarget(props) {
       this.scaledHeight = this.scale * this.height;
       this.spriteSheet = foodSheet;
       this.ready = false;
+      this.spriteSets = 7;
+      this.frameX = Math.floor(Math.random() * this.spriteSets);
+      this.frameY = 0;
       this.init()      
     }
 
@@ -47,7 +50,7 @@ export default function useTarget(props) {
 
     async init() {
       try {
-        await foodSheetLoadedPromise; // Wait for the image to load
+        await foodSheetLoadedPromise; // Wait for food sprites to load
         this.ready = true; // Set the 'ready' flag to true once the image is loaded
       } catch (error) {
         console.error("Error loading image:", error);
@@ -59,13 +62,8 @@ export default function useTarget(props) {
         // console.log("helllllppppp")
         return;
       }
-      // console.log(this.ready)
-      ctx.fillStyle = "rgba(225,225,225,0.5)";
       this.x -= this.speed;
-      // console.log(`this.x: ${this.x}`)
-      ctx.fillRect(this.x, this.y, this.scaledWidth, this.scaledWidth);
-      this.drawFrame(ctx, 0, foodLoopIndex, this.x, this.y)
-      // console.log("target drawn")
+      this.drawFrame(ctx, this.frameX, this.frameY + foodLoopIndex, this.x, this.y)
     }
 
     collideWith(projectile) {

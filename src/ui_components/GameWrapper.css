@@ -1,10 +1,14 @@
+.game-wrapper h1, .game-wrapper h3 {
+  position: relative;
+  z-index: 2;
+}
+
 .game-wrapper {
-    position: relative;
-    /* margin: auto; */
-    left: 50%;
-    transform: translateX(-50%);
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .game-wrapper > * {
-    position: absolute;
+  position: absolute;
 }

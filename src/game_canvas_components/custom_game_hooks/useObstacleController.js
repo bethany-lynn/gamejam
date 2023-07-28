@@ -6,7 +6,7 @@ export default function useObstacleController(props) {
   class ObstacleController {
     constructor(canvas) {
       this.canvas = canvas;
-      this.offset = 140;
+      this.offset = 100;
       this.hasCollisionOccurred = false;
       this.obstacles = [];
       this.timerTillNextObstacle = 0;
@@ -45,15 +45,6 @@ export default function useObstacleController(props) {
       const row = this.randomRow();
       this.spawn(x, (row * y) / 5 - this.offset, score);
 
-      // if (!this.hasCollisionOccurred) {
-      //   const collisionDetected = this.collideWith({ x: x, y: y });
-
-      //   if (collisionDetected) {
-      //     this.hasCollisionOccurred = true;
-      //     props.setCollisionWithObstacle(true);
-      //   }
-      // }
-
       this.obstacles.forEach((obstacle) => {
         if (this.isTargetOffScreen(obstacle)) {
           const index = this.obstacles.indexOf(obstacle);
@@ -83,7 +74,6 @@ export default function useObstacleController(props) {
 
         if (collisionDetected) {
           this.hasCollisionOccurred = true;
-        //   props.setCollisionWithObstacle(true);
           return true;
         }
       }
