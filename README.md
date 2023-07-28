@@ -49,6 +49,8 @@ until new things are tried!
 
 ### Resources :book:
 - [OpenGameArt](https://opengameart.org/)
+- Balloon Sprites by Chester on [OpenGameArt](https://opengameart.org/content/balloons)
+- "[LPC] Birds" by bluecarrot16, commissioned by castelonia. [OpenGameArt](https://opengameart.org/content/lpc-birds)
 - [Google Fonts](https://fonts.google.com/)
 - [MDN Web Docs - 2D Breakout Game Tutorial](https://developer.mozilla.org/en-US/docs/Games/Tutorials/2D_Breakout_game_pure_JavaScript)
 - [W3Schools - Canvas BezierCurveTo](https://www.w3schools.com/jsref/canvas_beziercurveto.asp)
@@ -60,3 +62,4 @@ until new things are tried!
 - [HTML5 JavaScript Game Development - Setup HTML5 Canvas Game](https://spicyyoghurt.com/tutorials/html5-javascript-game-development/setup-html5-canvas-game)
 - [HTML5 JavaScript Game Development - Collision Detection Physics](https://spicyyoghurt.com/tutorials/html5-javascript-game-development/collision-detection-physics)
 - [How to Shoot Bullets in JavaScript - Coding with Adam](https://www.youtube.com/watch?v=i7FzA4NavDs&t=1227s)
+- Thanks to Val Currie for all the help and rubber ducking!
