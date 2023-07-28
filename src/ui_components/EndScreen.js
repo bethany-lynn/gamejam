@@ -1,3 +1,9 @@
-export default function EndScreen() {
-    return <h1>game over end screen</h1>
+import React from "react";
+
+export default function EndScreen({ onRestartGame }) {
+  return (
+    <div>
+      <button onClick={onRestartGame}>Play Again</button>
+    </div>
+  );
 }
