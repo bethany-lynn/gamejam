@@ -43,7 +43,7 @@ export default function useProjectileController() {
     }
 
     isProjectileOffScreen(projectile) {
-      return projectile.y <= -projectile.height;
+      return projectile.y >= this.canvas.height + projectile.height;
     }
   }
   return { ProjectileController };

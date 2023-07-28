@@ -53,11 +53,11 @@ export default function useProjectile() {
 
     draw(ctx, projectileLoopIndex) {
       if (this.ready) {
-        ctx.fillStyle = "rgba(225,225,225,0.5)";
+        // ctx.fillStyle = "rgba(225,225,225,0.5)";
         this.y += this.speed;
-        ctx.fillRect(this.x, this.y, this.width, this.height);
+        // ctx.fillRect(this.x, this.y, this.width, this.height);
         this.drawFrame(ctx, projectileLoopIndex, 0, this.x, this.y)
-        console.log("poop frame drawn")
+        // console.log("poop frame drawn")
       }
     }
 
