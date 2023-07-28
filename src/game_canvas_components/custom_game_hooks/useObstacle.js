@@ -1,5 +1,6 @@
 export default function useObstacle() {
 
+  // sets spritesheet image source
   let balloonSheet = new Image();
   balloonSheet.src = "/sprites/BalloonSprites.png";
 
@@ -52,6 +53,7 @@ export default function useObstacle() {
       }
     }
 
+    // make sure image is loaded before trying to draw
     async init() {
       await balloonSheetLoadedPromise; // Wait for the image to load before setting 'ready' to true
       this.ready = true; // sprite sheet is ready for use, changing previous state
@@ -65,6 +67,8 @@ export default function useObstacle() {
       this.drawFrame(ctx, this.frameX * 5 + obstacleLoopIndex, this.frameY, this.x, this.y)
     }
 
+    // actual collision logic detailing the overlap of this Obstacle
+    // with a given sprite
     collideWith(sprite) {
       if (
         this.x < sprite.x + sprite.width &&

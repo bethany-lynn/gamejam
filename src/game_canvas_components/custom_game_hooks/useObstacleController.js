@@ -1,6 +1,7 @@
 import useObstacle from "./useObstacle";
 
 export default function useObstacleController(props) {
+ // import obstacle class
   const { Obstacle } = useObstacle();
 
   class ObstacleController {
@@ -14,6 +15,8 @@ export default function useObstacleController(props) {
       this.ready = false;
     }
 
+    // makes sure that the image file for the Obstacle class has loaded
+    // before attempting a draw
     async initObstacle() {
       const obstacle = new Obstacle(0, 200, 15); // Set initial x, y, and speed as needed
       await obstacle.init(); // Wait for the obstacle to be ready (image loaded)
@@ -41,6 +44,9 @@ export default function useObstacleController(props) {
       }
     }
 
+    // handles drawing and spawning new obstacle in one of four 4
+    // random rows, updates position every frame of each object,
+    // and removes obstacles that have left the screen
     draw(ctx, x, y, score, obstacleLoopIndex) {
       const row = this.randomRow();
       this.spawn(x, (row * y) / 5 - this.offset, score);
@@ -54,11 +60,14 @@ export default function useObstacleController(props) {
       });
     }
 
+    // random choice of one of four rows
     randomRow() {
       let numRow = 4;
       return Math.floor(Math.random() * numRow) + 1;
     }
 
+    // collision loop - checks if any collision has occurred,
+    // then runs method for each obstacle(s) collided 
     collideWith(sprite) {
       if (!this.hasCollisionOccurred) {
         const collisionDetected = this.obstacles.some((obstacle) => {
@@ -76,6 +85,7 @@ export default function useObstacleController(props) {
       return false;
     }
 
+    // checks if obstacle has lef the canvas
     isTargetOffScreen(obstacle) {
       return obstacle.x <= -2*obstacle.width;
     }

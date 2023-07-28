@@ -75,14 +75,12 @@ export default function useBird() {
         return;
       }
       this.move();
-      ctx.strokeStyle = "transparent";
-      ctx.strokeRect(this.x, this.y, this.scaledWidth, this.scaledHeight);
-      ctx.fillStyle = "transparent";
-      ctx.fillRect(this.x, this.y, this.scaledWidth, this.scaledHeight);
       this.drawFrame(ctx, obstacleLoopIndex, 3, this.x, this.y);
       this.shoot();
     }
 
+      // shoot method runs projectileController shoot method,
+      // instantiating new projectile
     shoot() {
       if (this.shootPressed) {
         const speed = 15;
@@ -94,7 +92,6 @@ export default function useBird() {
     }
     
     // methods responding to keypress - interactive elements
-
     move() {
       if (this.downPressed) {
         if (this.y < this.minHeight) {
@@ -108,6 +105,7 @@ export default function useBird() {
       }
     }
 
+    // methods to handle keyboard event listeners
     keydown = (e) => {
       if (e.code === "ArrowUp") {
         this.upPressed = true;

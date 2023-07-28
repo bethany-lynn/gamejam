@@ -48,6 +48,7 @@ export default function usePoof(props) {
       }
     }
 
+    // makes sure sprite sheet promise has resolved
     async init() {
       try {
         await poofSheetLoadedPromise;
@@ -57,12 +58,13 @@ export default function usePoof(props) {
       }
     }
 
+    // this method handles the logic for drawing the poof animation
+    // for when a target is hit by a projectile - unlike other sprites,
+    // this animation only plays once through
     draw(ctx, poofLoopIndex) {
       if (!this.ready) {
         return;
       }
-      // ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
-      // ctx.fillRect(this.x, this.y, this.scaledWidth, this.scaledWidth);
       this.drawFrame(ctx, this.frameX, this.frameY, this.x, this.y);
       if (poofLoopIndex % 2 === 0) {
         this.frameX += 1;

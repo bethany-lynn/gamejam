@@ -51,6 +51,7 @@ until new things are tried!
 - [OpenGameArt](https://opengameart.org/)
 - Balloon Sprites by Chester on [OpenGameArt](https://opengameart.org/content/balloons)
 - "[LPC] Birds" by bluecarrot16, commissioned by castelonia. [OpenGameArt](https://opengameart.org/content/lpc-birds)
+- Foodies Sprites by maruki [OpenGameArt](https://opengameart.org/content/foodies)
 - [Google Fonts](https://fonts.google.com/)
 - [MDN Web Docs - 2D Breakout Game Tutorial](https://developer.mozilla.org/en-US/docs/Games/Tutorials/2D_Breakout_game_pure_JavaScript)
 - [W3Schools - Canvas BezierCurveTo](https://www.w3schools.com/jsref/canvas_beziercurveto.asp)
