@@ -6,7 +6,7 @@ export default function useObstacleController(props) {
   class ObstacleController {
     constructor(canvas) {
       this.canvas = canvas;
-      this.offset = 140;
+      this.offset = 100;
       this.hasCollisionOccurred = false;
       this.obstacles = [];
       this.timerTillNextObstacle = 0;
@@ -64,7 +64,7 @@ export default function useObstacleController(props) {
     }
 
     randomRow() {
-      let numRow = 6;
+      let numRow = 4;
       return Math.floor(Math.random() * numRow) + 1;
     }
 

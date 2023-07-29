@@ -28,6 +28,7 @@ export default function GameCanvas(props) {
     let birdLoopIndex = 0;
     let obstacleLoopIndex = 0; //aiming for 5 frames a second loop, 12 frames per cycle
     let foodLoopIndex = 0;
+    let render = true;
 
     const targetController = new TargetController(canvas);
     const projectileController = new ProjectileController(canvas);
@@ -66,13 +67,10 @@ export default function GameCanvas(props) {
 
       targetController.draw(
         context,
-        1100,
+        canvas.width,
         ((8 * canvas.height) / 9),
         foodLoopIndex
       );
-
-      context.fillStyle = "rgba(225,225,225,0.5)";
-      context.fillRect(1100, 600, 64, 64)
 
       obstacleController.draw(
         context,
@@ -99,13 +97,14 @@ export default function GameCanvas(props) {
 
       if (obstacleController.collideWith(bird)) {
         props.setGameOver(true);
+        render = false;
         console.log("bird collided with obstacle");
         // console.log(`Game is stopped: ${gameStopped}`);
         // console.log(`state of the game:  ${gameOver}`);
         // console.log("Game Over.")
       }
 
-      requestAnimationFrame(game);
+      if (render) {requestAnimationFrame(game);}
     }
 
     requestAnimationFrame(game);
