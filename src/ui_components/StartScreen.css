@@ -1,14 +1,24 @@
 .StartScreen {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 50vh;
+}
+
+.game-description {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-align: center;
 }
 
 #button {
-    padding: 12px 24px;
-    font-size: 18px;
-    background-color: #372c19;
+    padding: 50px 70px;
+    font-family: 'Handjet', cursive;
+    font-size: 40px;
+    background-color: #027509;
     color: white;
     border: none;
     border-radius: 8px;
@@ -17,7 +27,7 @@
 }
 
 #button:hover {
-    background-color: #140c05;
+    background-color: #0f1d0a;
 }
 
 #button:focus {

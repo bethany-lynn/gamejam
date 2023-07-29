@@ -2,24 +2,5 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-}
-
-#button {
-    padding: 12px 24px;
-    font-size: 18px;
-    background-color: #372c19;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-#button:hover {
-    background-color: #140c05;
-}
-
-#button:focus {
-    outline: none;
+    height: 50vh;
 }

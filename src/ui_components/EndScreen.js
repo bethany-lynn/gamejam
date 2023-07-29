@@ -1,4 +1,5 @@
 import React from "react";
+import './EndScreen.css';
 
 export default function EndScreen({ onRestartGame }) {
   return (
