@@ -40,6 +40,9 @@ export default function useTarget(props) {
       this.scaledHeight = this.scale * this.height;
       this.spriteSheet = foodSheet;
       this.ready = false;
+      this.spriteSets = 9;
+      this.frameX = Math.floor(Math.random() * this.spriteSets);
+      this.frameY = 0;
       this.init()      
     }
 
@@ -79,7 +82,7 @@ export default function useTarget(props) {
       this.x -= this.speed;
       // console.log(`this.x: ${this.x}`)
       ctx.fillRect(this.x, this.y, this.scaledWidth, this.scaledWidth);
-      this.drawFrame(ctx, 3, foodLoopIndex, this.x, this.y)
+      this.drawFrame(ctx, this.frameX, this.frameY + foodLoopIndex, this.x, this.y)
       // console.log("target drawn")
     }
 

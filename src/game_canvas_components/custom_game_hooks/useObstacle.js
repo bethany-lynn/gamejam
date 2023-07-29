@@ -26,14 +26,12 @@ export default function useObstacle() {
       this.scaledHeight = this.scale * this.height; // giving balloon size when drawn
       this.spriteSheet = balloonSheet; // using loaded sheet
       this.ready = false; // not yet ready for drawing
-      this.frameX = 0;
-      this.frameY = 0;
       
       // code for random balloon selection from sprite sheet
       // const maxColumns = 9; // Assuming there are 10 columns in the sprite sheet
-      const maxRows = 2; // Assuming there are 3 rows in the sprite sheet
+      this.spriteSets = 3; // Assuming there are 3 rows in the sprite sheet
       this.frameX = Math.floor(Math.random() * 2);
-      this.frameY = Math.floor(Math.random() * maxRows);
+      this.frameY = Math.floor(Math.random() * this.spriteSets);
     }
 
     drawFrame(ctx, frameX, frameY, canvasX, canvasY) { // method for drawing specific frame
