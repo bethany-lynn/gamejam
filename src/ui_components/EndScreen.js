@@ -2,8 +2,8 @@ import React from "react";
 
 export default function EndScreen({ onRestartGame }) {
   return (
-    <div>
-      <button onClick={onRestartGame}>Play Again</button>
+    <div className="EndScreen">
+      <button onClick={onRestartGame} id="button">Play Again</button>
     </div>
   );
 }

@@ -30,10 +30,10 @@ export default function useObstacle() {
       this.frameY = 0;
       
       // code for random balloon selection from sprite sheet
-      // const maxColumns = 10; // Assuming there are 10 columns in the sprite sheet
-      // const maxRows = 3; // Assuming there are 3 rows in the sprite sheet
-      // this.frameX = Math.floor(Math.random() * maxColumns);
-      // this.frameY = Math.floor(Math.random() * maxRows);
+      // const maxColumns = 9; // Assuming there are 10 columns in the sprite sheet
+      const maxRows = 2; // Assuming there are 3 rows in the sprite sheet
+      this.frameX = Math.floor(Math.random() * 2);
+      this.frameY = Math.floor(Math.random() * maxRows);
     }
 
     drawFrame(ctx, frameX, frameY, canvasX, canvasY) { // method for drawing specific frame
@@ -64,8 +64,8 @@ export default function useObstacle() {
       ctx.fillStyle = "transparent";
       this.x -= this.speed; // move from right to left of canvas by x position
       ctx.fillRect(this.x, this.y, this.scaledWidth, this.scaledHeight);
-      this.drawFrame(ctx, 5 + obstacleLoopIndex, 1, this.x, this.y) // drawFrame from Obstacle instance
-      // this.drawFrame(ctx, this.frameX, this.frameY, this.x, this.y)
+      // this.drawFrame(ctx, 5 + obstacleLoopIndex, 1, this.x, this.y) // drawFrame from Obstacle instance
+      this.drawFrame(ctx, this.frameX * 5 + obstacleLoopIndex, this.frameY, this.x, this.y)
     }
 
     collideWith(sprite) {
