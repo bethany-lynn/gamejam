@@ -73,7 +73,7 @@ export default function useBird() {
     shoot() {
       if (this.shootPressed) {
         const speed = 15;
-        const delay = 25;
+        const delay = 15;
         const projectileX = this.x + this.width / 4;
         const projectileY = this.y;
         this.projectileController.shoot(projectileX, projectileY, speed, delay);

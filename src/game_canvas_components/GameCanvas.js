@@ -1,6 +1,7 @@
 import { useRef, useEffect, useState } from "react";
 import useBird from "./custom_game_hooks/useBird";
 import useProjectileController from "./custom_game_hooks/useProjectileController";
+import usePoofController from "./custom_game_hooks/usePoofController";
 import useTargetController from "./custom_game_hooks/useTargetController";
 import useObstacleController from "./custom_game_hooks/useObstacleController";
 import './GameCanvas.css';
@@ -14,6 +15,7 @@ export default function GameCanvas(props) {
 
   let { Bird } = useBird();
   let { ProjectileController } = useProjectileController();
+  let { PoofController } = usePoofController();
   let { TargetController } = useTargetController();
   let { ObstacleController } = useObstacleController(
     // {setCollisionWithObstacle,}
@@ -28,9 +30,11 @@ export default function GameCanvas(props) {
     let birdLoopIndex = 0;
     let obstacleLoopIndex = 0; //aiming for 5 frames a second loop, 12 frames per cycle
     let foodLoopIndex = 0;
+    let poofLoopIndex = 0;
     let render = true;
 
     const targetController = new TargetController(canvas);
+    const poofController = new PoofController(canvas);
     const projectileController = new ProjectileController(canvas);
     const obstacleController = new ObstacleController(canvas);
     const bird = new Bird(
@@ -47,6 +51,11 @@ export default function GameCanvas(props) {
         obstacleLoopIndex += 1;
         foodLoopIndex += 1;
       }
+
+      if (frameCount) {
+        poofLoopIndex = frameCount;
+      }
+
       if (birdLoopIndex > 2) {
         birdLoopIndex = 0;
       }
@@ -56,6 +65,8 @@ export default function GameCanvas(props) {
       if (foodLoopIndex > 1) {
         foodLoopIndex = 0;
       }
+      
+
 
       // console.log(`foodloopindex: ${foodLoopIndex}`)
       context.clearRect(0, 0, canvas.width, canvas.height);
@@ -72,6 +83,11 @@ export default function GameCanvas(props) {
         foodLoopIndex
       );
 
+      poofController.draw(
+        context,
+        poofLoopIndex
+      );
+
       obstacleController.draw(
         context,
         canvas.width,
@@ -83,9 +99,10 @@ export default function GameCanvas(props) {
 
       projectileController.projectiles.forEach((projectile) => {
         if (targetController.collideWith(projectile)) {
+          poofController.spawn(projectile.x, projectile.y);
           console.log("goodbye target animation");
         }
-      })
+      });
 
 
       targetController.targets.forEach((target) => {

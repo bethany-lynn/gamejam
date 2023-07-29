@@ -1,21 +1,7 @@
 export default function useTarget(props) {
 
-  let foodSheet = new Image();
+  const foodSheet = new Image();
   foodSheet.src = "/sprites/foodiesBorderandBorderless.png";
-
-  // let poofSheet = new PoofImage();
-  // poofSheet.src = '/sprites/poof.png'
-
-  // // promise for poof image loading
-  // const poofSheetLoadedPromise = new Promise((resolve, reject) => {
-  //   poofSheet.onload = () => {
-  //     resolve();
-  //   };
-  //   poofSheet.onerror = (error) => {
-  //     reject(error);
-  //     console.lof("error loading poof animation:", error);
-  //   };
-  // })
 
   // A Promise to handle image loading
   const foodSheetLoadedPromise = new Promise((resolve, reject) => {
@@ -65,7 +51,6 @@ export default function useTarget(props) {
     async init() {
       try {
         await foodSheetLoadedPromise; // Wait for food sprites to load
-        // await poofSheetLoadedPromise; // wait for poof sprites to load
         this.ready = true; // Set the 'ready' flag to true once the image is loaded
       } catch (error) {
         console.error("Error loading image:", error);
@@ -78,10 +63,10 @@ export default function useTarget(props) {
         return;
       }
       // console.log(this.ready)
-      ctx.fillStyle = "transparent";
+      // ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
       this.x -= this.speed;
       // console.log(`this.x: ${this.x}`)
-      ctx.fillRect(this.x, this.y, this.scaledWidth, this.scaledWidth);
+      // ctx.fillRect(this.x, this.y, this.scaledWidth, this.scaledWidth);
       this.drawFrame(ctx, this.frameX, this.frameY + foodLoopIndex, this.x, this.y)
       // console.log("target drawn")
     }
