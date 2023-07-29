@@ -80,6 +80,14 @@ export default function GameCanvas(props) {
         obstacleLoopIndex
       );
 
+
+      projectileController.projectiles.forEach((projectile) => {
+        if (targetController.collideWith(projectile)) {
+          console.log("goodbye target animation");
+        }
+      })
+
+
       targetController.targets.forEach((target) => {
         if (projectileController.collideWith(target)) {
           console.log("hit a target");

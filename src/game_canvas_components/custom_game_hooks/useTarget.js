@@ -40,7 +40,7 @@ export default function useTarget(props) {
       this.scaledHeight = this.scale * this.height;
       this.spriteSheet = foodSheet;
       this.ready = false;
-      this.spriteSets = 9;
+      this.spriteSets = 7;
       this.frameX = Math.floor(Math.random() * this.spriteSets);
       this.frameY = 0;
       this.init()      
