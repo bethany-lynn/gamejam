@@ -3,6 +3,20 @@ export default function useTarget(props) {
   let foodSheet = new Image();
   foodSheet.src = "/sprites/foodiesBorderandBorderless.png";
 
+  // let poofSheet = new PoofImage();
+  // poofSheet.src = '/sprites/poof.png'
+
+  // // promise for poof image loading
+  // const poofSheetLoadedPromise = new Promise((resolve, reject) => {
+  //   poofSheet.onload = () => {
+  //     resolve();
+  //   };
+  //   poofSheet.onerror = (error) => {
+  //     reject(error);
+  //     console.lof("error loading poof animation:", error);
+  //   };
+  // })
+
   // A Promise to handle image loading
   const foodSheetLoadedPromise = new Promise((resolve, reject) => {
     foodSheet.onload = () => {
@@ -47,7 +61,8 @@ export default function useTarget(props) {
 
     async init() {
       try {
-        await foodSheetLoadedPromise; // Wait for the image to load
+        await foodSheetLoadedPromise; // Wait for food sprites to load
+        // await poofSheetLoadedPromise; // wait for poof sprites to load
         this.ready = true; // Set the 'ready' flag to true once the image is loaded
       } catch (error) {
         console.error("Error loading image:", error);
@@ -67,6 +82,8 @@ export default function useTarget(props) {
       this.drawFrame(ctx, 3, foodLoopIndex, this.x, this.y)
       // console.log("target drawn")
     }
+
+    // draw(ctx, poofLoopIndex)
 
     collideWith(projectile) {
       if (

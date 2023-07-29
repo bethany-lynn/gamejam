@@ -1,7 +1,9 @@
+import './StartScreen.css';
+
 export default function StartScreen({ onStartGame }) {
     return (
-        <div>
-            <button onClick={onStartGame}>Start Game</button>
+        <div className='StartScreen'>
+            <button onClick={onStartGame} id="button">Start Game</button>
         </div>
     );
 }
