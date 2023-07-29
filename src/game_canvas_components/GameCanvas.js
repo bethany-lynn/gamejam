@@ -85,7 +85,7 @@ export default function GameCanvas(props) {
           console.log("hit a target");
           score += 1;
           setCollidedTarget(target); // Store the collided target
-          props.setScore(score);
+          // props.setScore(score);
         }
       });
 
