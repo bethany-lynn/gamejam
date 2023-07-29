@@ -5,32 +5,40 @@ export default function useObstacle() {
 
   // A Promise to handle image loading
   const balloonSheetLoadedPromise = new Promise((resolve, reject) => {
-    balloonSheet.onload = () => {
+    balloonSheet.onload = () => { // event handler - listens for load of sheet
       resolve();
     };
-    balloonSheet.onerror = (error) => {
+    balloonSheet.onerror = (error) => { // event listening for error loading sheet
       reject(error);
       console.error("Error loading image:", error);
     };
   });
 
   class Obstacle {
-    constructor(x, y, speed) {
+    constructor(x, y, speed) { // initializes position and speed of balloon
       this.x = x;
       this.y = y;
       this.speed = speed;
-      this.scale = 3;
+      this.scale = 2.5; // drawn 2.5 many times more than original size
       this.width = 22.4; // 224px across / 10 columns
       this.height = 44.5; // 132px down / 3 rows
-      this.scaledWidth = this.scale * this.width;
-      this.scaledHeight = this.scale * this.height;
-      this.spriteSheet = balloonSheet;
-      this.ready = false;
+      this.scaledWidth = this.scale * this.width; // giving balloon size when drawn
+      this.scaledHeight = this.scale * this.height; // giving balloon size when drawn
+      this.spriteSheet = balloonSheet; // using loaded sheet
+      this.ready = false; // not yet ready for drawing
+      this.frameX = 0;
+      this.frameY = 0;
+      
+      // code for random balloon selection from sprite sheet
+      // const maxColumns = 10; // Assuming there are 10 columns in the sprite sheet
+      // const maxRows = 3; // Assuming there are 3 rows in the sprite sheet
+      // this.frameX = Math.floor(Math.random() * maxColumns);
+      // this.frameY = Math.floor(Math.random() * maxRows);
     }
 
-    drawFrame(ctx, frameX, frameY, canvasX, canvasY) {
-      if (this.ready) {
-        ctx.drawImage(
+    drawFrame(ctx, frameX, frameY, canvasX, canvasY) { // method for drawing specific frame
+      if (this.ready) { // checks if promise is good - image is loaded from sheet
+        ctx.drawImage( // actual drawing happening
           this.spriteSheet,
           frameX * this.width,
           frameY * this.height,
@@ -46,17 +54,18 @@ export default function useObstacle() {
 
     async init() {
       await balloonSheetLoadedPromise; // Wait for the image to load before setting 'ready' to true
-      this.ready = true;
+      this.ready = true; // sprite sheet is ready for use, changing previous state
     }
 
     draw(ctx, obstacleLoopIndex) {
-      if (!this.ready) {
+      if (!this.ready) { // if not ready, immediately return from method
         return;
       }
-      ctx.fillStyle = "rgba(225,225,225,0.5)";
-      this.x -= this.speed;
+      ctx.fillStyle = "transparent";
+      this.x -= this.speed; // move from right to left of canvas by x position
       ctx.fillRect(this.x, this.y, this.scaledWidth, this.scaledHeight);
-      this.drawFrame(ctx, 5 + obstacleLoopIndex, 1, this.x, this.y)
+      this.drawFrame(ctx, 5 + obstacleLoopIndex, 1, this.x, this.y) // drawFrame from Obstacle instance
+      // this.drawFrame(ctx, this.frameX, this.frameY, this.x, this.y)
     }
 
     collideWith(sprite) {
@@ -75,27 +84,21 @@ export default function useObstacle() {
   return { Obstacle, init: () => balloonSheet };
 }
 
-// function obstacleData() {
-//   const obstacleScale = 2;
-//   // const speed = Math.random() * 2 + 3;
-//   // const interval = Math.random() * 2000 + 1000; // Random interval between 1000ms and 3000ms
-//   function getRandomColor() {
-//     // Array of 10 colors to choose from
-//     const colors = [
-//       "#D9ED92",
-//       "#B5E48C",
-//       "#99D98C",
-//       "#76C893",
-//       "#52B69A",
-//       "#34A0A4",
-//       "#168AAD",
-//       "#1A759F",
-//       "#1E6091",
-//       "#184E77",
-//     ];
-//     // Randomly select a color from the colors array
-//     return colors[Math.floor(Math.random() * colors.length)];
-//   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //   const numRows = 5; // Number of rows (changed to 3)
 //   const rowHeight = canvas.height / numRows; // Height of each row

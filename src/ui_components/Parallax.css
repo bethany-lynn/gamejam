@@ -16,25 +16,25 @@
 
 #backtrees {
     background-image: url(../images/backtrees.png);
-    animation-duration: 4000ms;
+    animation-duration: 4250ms;
     background-repeat: repeat-x;
 }
 
 #sunlight {
     background-image: url(../images/sunlight.png);
-    animation-duration: 3750ms;
+    animation-duration: 4000ms;
     background-repeat: repeat-x;
 }
 
 #middletrees {
     background-image: url(../images/middletrees.png);
-    animation-duration: 3500ms;
+    animation-duration: 3750ms;
     background-repeat: repeat-x;
 }
 
 #fronttrees {
     background-image: url(../images/fronttrees.png);
-    animation-duration: 3000ms;
+    animation-duration: 3250ms;
     background-repeat: repeat-x;
 }
 

@@ -60,11 +60,11 @@ export default function useTarget(props) {
         return;
       }
       // console.log(this.ready)
-      ctx.fillStyle = "rgba(225,225,225,0.5)";
+      ctx.fillStyle = "transparent";
       this.x -= this.speed;
       // console.log(`this.x: ${this.x}`)
       ctx.fillRect(this.x, this.y, this.scaledWidth, this.scaledWidth);
-      this.drawFrame(ctx, 0, foodLoopIndex, this.x, this.y)
+      this.drawFrame(ctx, 3, foodLoopIndex, this.x, this.y)
       // console.log("target drawn")
     }
 
