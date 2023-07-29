@@ -26,6 +26,8 @@ export default function useBird() {
       this.scaledHeight = this.scale * this.height;
       this.spriteSheet = birdSheet;
       this.ready = false;
+      this.maxHeight = 35;
+      this.minHeight = 525;
       this.initBird();
 
       document.addEventListener("keydown", this.keydown);
@@ -80,10 +82,14 @@ export default function useBird() {
 
     move() {
       if (this.downPressed) {
-        this.y += this.speed;
+        if (this.y < this.minHeight) {
+          this.y += this.speed;
+        }
       }
       if (this.upPressed) {
-        this.y -= this.speed;
+        if (this.y > this.maxHeight) {
+          this.y -= this.speed;
+        }
       }
     }
 
