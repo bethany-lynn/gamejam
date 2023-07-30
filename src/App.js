@@ -9,7 +9,8 @@ function App(props) {
   const [score, setScore] = useState(0);
   const [gameStarted, setGameStarted] = useState(false); // access state value, current and updated
 
-  const handleStartGame = () => {
+  // initialize and reset/start blank variable states
+  const handleStartGame = () => { // start game with state of 3 variables
     setScore(0);
     setGameOver(false);
     setGameStarted(true);

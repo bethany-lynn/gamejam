@@ -21,14 +21,15 @@ export default function useProjectileController() {
       this.timerTillNextProjectile--;
     }
 
-    draw(ctx) {
+    draw(ctx, projectileLoopIndex) {
       this.projectiles.forEach((projectile) => {
         if (this.isProjectileOffScreen(projectile)) {
           const index = this.projectiles.indexOf(projectile);
           this.projectiles.splice(index, 1);
         }
-        projectile.draw(ctx);
+        projectile.draw(ctx, projectileLoopIndex);
       });
+      // console.log("projectile controller draw logged")
     }
 
     collideWith(sprite) {
