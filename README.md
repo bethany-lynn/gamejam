@@ -1,4 +1,5 @@
 ## Lil Bird Fly Home
+A cozy screen runner made by June Adams and Bethany Lynn.
 
 ### Description
 Lil Bird is just trying to fly peacefully through her forest, enjoying the sounds and sights of nature. But a group of
@@ -8,7 +9,14 @@ Maybe she should send these humans a little message, in the form of a dropping, 
 in her home!
 
 ### Getting Started
-To run the game, please go to:
+To run the game locally:
+- Make sure you have Node.js and npm (Node Package Manager) installed on your machine.
+- Clone this repository to your local machine using the following command: " git clone https://github.com/your-username/your-game-repo.git "
+- Change into the project directory: "cd gamejam"
+- Install the required npm dependencies: " npm install "
+- Once installation is complete, start the game with " npm start "
+- Open your broswer and visit http://localhost:3000 to play the game
+- Have fun and play! Enjoy our Lil Bird and all her bugs. :bird: :bug:
 
 ### Functionality & Gameplay
 This game was built using React and Canvas.
@@ -27,10 +35,18 @@ Coding and learning should be fun, albeit sometimes stressful and full of unknow
 until new things are tried!
 
 ### Resources
-opengameart.org <br/>
-MDN Web Docs <br/>
-W3 schools <br/>
-Create React app
+- [OpenGameArt](https://opengameart.org/)
+- [Google Fonts](https://fonts.google.com/)
+- [MDN Web Docs - 2D Breakout Game Tutorial](https://developer.mozilla.org/en-US/docs/Games/Tutorials/2D_Breakout_game_pure_JavaScript)
+- [W3Schools - Canvas BezierCurveTo](https://www.w3schools.com/jsref/canvas_beziercurveto.asp)
+- [Photopea](https://www.photopea.com/)
+- [npm - react-scroll-parallax](https://www.npmjs.com/package/react-scroll-parallax)
+- [React Spring - Parallax](https://www.react-spring.dev/docs/components/parallax)
+- [Creating a Canvas SVG Blob](https://blog.meain.io/2019/canvas-svg-blob/)
+- [Canvas with React.js Tutorial](https://medium.com/@pdx.lucasm/canvas-with-react-js-32e133c05258)
+- [HTML5 JavaScript Game Development - Setup HTML5 Canvas Game](https://spicyyoghurt.com/tutorials/html5-javascript-game-development/setup-html5-canvas-game)
+- [HTML5 JavaScript Game Development - Collision Detection Physics](https://spicyyoghurt.com/tutorials/html5-javascript-game-development/collision-detection-physics)
+
 
 ### Contributors
 
