@@ -11,7 +11,7 @@ in her home!
 ### Getting Started
 To run the game locally:
 - Make sure you have Node.js and npm (Node Package Manager) installed on your machine.
-- Clone this repository to your local machine using the following command: " git clone https://github.com/your-username/your-game-repo.git "
+- Clone this repository to your local machine using the following command: " git clone https://github.com/bethany-lynn/gamejam.git "
 - Change into the project directory: "cd gamejam"
 - Install the required npm dependencies: " npm install "
 - Once installation is complete, start the game with " npm start "
