@@ -62,16 +62,9 @@ export default function useTarget(props) {
         // console.log("helllllppppp")
         return;
       }
-      // console.log(this.ready)
-      // ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
       this.x -= this.speed;
-      // console.log(`this.x: ${this.x}`)
-      // ctx.fillRect(this.x, this.y, this.scaledWidth, this.scaledWidth);
       this.drawFrame(ctx, this.frameX, this.frameY + foodLoopIndex, this.x, this.y)
-      // console.log("target drawn")
     }
-
-    // draw(ctx, poofLoopIndex)
 
     collideWith(projectile) {
       if (

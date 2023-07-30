@@ -48,10 +48,6 @@ export default function useTargetController() {
           target.draw(ctx, foodLoopIndex);
         });
       }
-      // console.log(
-      //   "Target x values in TargetController:",
-      //   this.targets.map((target) => target.x)
-      // );
     }
 
     collideWith(sprite) {

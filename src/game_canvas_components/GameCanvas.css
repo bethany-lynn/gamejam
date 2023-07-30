@@ -4,3 +4,9 @@
     margin: 0 auto;
     z-index: 10;
 }
+
+.score-box {
+    position: absolute;
+    top: -50px;
+    left: -50px;
+}
