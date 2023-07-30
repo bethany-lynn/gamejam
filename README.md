@@ -1,6 +1,6 @@
 ## Lil Bird Fly Home
-A cozy screen runner made by June Adams and Bethany Lynn.
-[June's GitHub Profile](https://github.com/juneadam) :woman_mage:
+A cozy screen runner made by June Adams and Bethany Lynn. <br/>
+[June's GitHub Profile](https://github.com/juneadam) 🧙‍♀️ <br/>
 [Bethany's GitHub Profile](https://github.com/bethany-lynn) :elf:
 
 
