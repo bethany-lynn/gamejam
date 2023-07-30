@@ -18,7 +18,6 @@ export default function GameCanvas(props) {
   let { PoofController } = usePoofController();
   let { TargetController } = useTargetController();
   let { ObstacleController } = useObstacleController(
-    // {setCollisionWithObstacle,}
   );
 
   let score = 0;
@@ -158,7 +157,7 @@ export default function GameCanvas(props) {
   return (
     <>
       <canvas className="birdCanvas" width="1200" height="675" ref={canvasRef}>
-        Bird Party Game!
+        Lil Bird Game!
       </canvas>
     </>
   );

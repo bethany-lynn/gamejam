@@ -1,5 +1,8 @@
 ## Lil Bird Fly Home
 A cozy screen runner made by June Adams and Bethany Lynn.
+[June's GitHub Profile](https://github.com/juneadam) :woman_mage:
+[Bethany's GitHub Profile](https://github.com/bethany-lynn) :elf:
+
 
 ### Description
 Lil Bird is just trying to fly peacefully through her forest, enjoying the sounds and sights of nature. But a group of
@@ -18,13 +21,24 @@ To run the game locally:
 - Open your broswer and visit http://localhost:3000 to play the game
 - Have fun and play! Enjoy our Lil Bird and all her bugs. :bird: :bug:
 
-### Functionality & Gameplay
+### Functionality & Gameplay :video_game:
 This game was built using React and Canvas.
 
-### Languages used
-React & JavaScript.
+### Technologies :computer:
+This is a fun and interactive game called "Lil Bird Party Game" built using React, Canvas, and JavaScript. 
+In the game, players control a bird and try to shoot down various targets with bird poop while avoiding obstacles(balloons).
 
-### Inspiration
+- **React:** The game's user interface and components are built using React, a popular JavaScript library for building user interfaces.
+
+- **Canvas:** The game's visual elements, animations, and interactions are created using the HTML5 Canvas element, allowing for dynamic rendering of graphics.
+
+- **JavaScript:** The game logic and interactivity are implemented using JavaScript, providing the necessary functionality for the game to run smoothly.
+
+## Building Process :hammer:
+The game development process involved combining the power of React for managing the application state and user interface, along with the versatility of Canvas for rendering the game's graphics. Key components and hooks were created to handle the bird's movement, projectile firing, and collision detection with targets and obstacles.
+Additionally, the game uses various controllers (ProjectileController, PoofController, TargetController, ObstacleController) to manage the game elements, their interactions, and animations.
+
+### Inspiration :sparkles:
 We have already partnered together in the past on bird related games, and felt like keeping up with the bird theme 
 would be a fun way to introduce ourselves to the React Jam for the first time!
 We are both big fans of animals, and enjoy learning things about birds. 
@@ -34,7 +48,7 @@ take this as an opportunity to geek-out about things we already enjoy, while lea
 Coding and learning should be fun, albeit sometimes stressful and full of unknowns, but growth can't happen
 until new things are tried!
 
-### Resources
+### Resources :book:
 - [OpenGameArt](https://opengameart.org/)
 - [Google Fonts](https://fonts.google.com/)
 - [MDN Web Docs - 2D Breakout Game Tutorial](https://developer.mozilla.org/en-US/docs/Games/Tutorials/2D_Breakout_game_pure_JavaScript)
@@ -46,15 +60,4 @@ until new things are tried!
 - [Canvas with React.js Tutorial](https://medium.com/@pdx.lucasm/canvas-with-react-js-32e133c05258)
 - [HTML5 JavaScript Game Development - Setup HTML5 Canvas Game](https://spicyyoghurt.com/tutorials/html5-javascript-game-development/setup-html5-canvas-game)
 - [HTML5 JavaScript Game Development - Collision Detection Physics](https://spicyyoghurt.com/tutorials/html5-javascript-game-development/collision-detection-physics)
-
-
-### Contributors
-
-### License
-
-### Acknowledgements
-
-https://www.youtube.com/watch?v=i7FzA4NavDs&t=1227s
-
-<!-- ![Screenshot 1](path/to/screenshot-1.png)
-![Screenshot 2](path/to/screenshot-2.png) -->
+- [How to Shoot Bullets in JavaScript - Coding with Adam](https://www.youtube.com/watch?v=i7FzA4NavDs&t=1227s)
