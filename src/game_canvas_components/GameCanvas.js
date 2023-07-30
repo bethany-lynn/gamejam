@@ -108,7 +108,7 @@ export default function GameCanvas(props) {
         if (projectileController.collideWith(target)) {
           console.log("hit a target");
           score += 1;
-          setCollidedTarget(target); // Store the collided target
+          // setCollidedTarget(target); // Store the collided target
           // props.setScore(score);
         }
       });
