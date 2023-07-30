@@ -1,17 +1,17 @@
-## Lil Bird Fly Home
+## Lil Bird Fly Home :bird:
 A cozy screen runner made by June Adams and Bethany Lynn. <br/>
-[June's GitHub Profile](https://github.com/juneadam) 🧙‍♀️ <br/>
-[Bethany's GitHub Profile](https://github.com/bethany-lynn) :elf:
+- [June's GitHub Profile](https://github.com/juneadam) 🧙‍♀️ <br/>
+- [Bethany's GitHub Profile](https://github.com/bethany-lynn) :elf:
 
 
-### Description
+### Description ⭐
 Lil Bird is just trying to fly peacefully through her forest, enjoying the sounds and sights of nature. But a group of
 loud and messy humans are disrupting her peaceful afternoon with their human party. How rude! Their balloons and 
 snacks are getting everywhere, and Lil Bird needs to be careful as she flies home.
 Maybe she should send these humans a little message, in the form of a dropping, so they know better than to litter
 in her home!
 
-### Getting Started
+### Getting Started :video_game:
 To run the game locally:
 - Make sure you have Node.js and npm (Node Package Manager) installed on your machine.
 - Clone this repository to your local machine using the following command: " git clone https://github.com/bethany-lynn/gamejam.git "
@@ -19,12 +19,11 @@ To run the game locally:
 - Install the required npm dependencies: " npm install "
 - Once installation is complete, start the game with " npm start "
 - Open your broswer and visit http://localhost:3000 to play the game
-- Have fun and play! Enjoy our Lil Bird and all her bugs. :bird: :bug:
-
-### Functionality & Gameplay :video_game:
-This game was built using React and Canvas.
+- Have fun and play! Enjoy our Lil Bird and all her bugs. :bug:
 
 ### Technologies :computer:
+- This game was built using React and Canvas.
+
 This is a fun and interactive game called "Lil Bird Party Game" built using React, Canvas, and JavaScript. 
 In the game, players control a bird and try to shoot down various targets with bird poop while avoiding obstacles(balloons).
 
