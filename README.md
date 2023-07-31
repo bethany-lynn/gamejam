@@ -4,10 +4,10 @@ A cozy screen runner made by June Adams and Bethany Lynn. <br/>
 - [Bethany's GitHub Profile](https://github.com/bethany-lynn) :elf:
 
 ### Description ⭐
-Lil Bird is just trying to fly peacefully through her forest, enjoying the sounds and sights of nature. But a group of
-loud and messy humans are disrupting her peaceful afternoon with their human party. How rude! Their balloons and 
-snacks are getting everywhere, and Lil Bird needs to be careful as she flies home.
-Maybe she should send these humans a little message, in the form of a dropping, so they know better than to litter
+Lil Bird and her friends are just trying to fly peacefully through their forest, enjoying the sounds and sights of nature. But a group of
+loud and messy humans are disrupting their peaceful afternoon with their human party. How rude! Their balloons and 
+snacks are getting everywhere, and Lil Bird and her friends needa to be careful as she flies home.
+Maybe they should send these humans a little message, in the form of a dropping, so they know better than to litter
 in her home!
 
 ### Getting Started :video_game:
