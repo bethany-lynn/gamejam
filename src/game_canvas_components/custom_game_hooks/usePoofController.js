@@ -11,6 +11,8 @@ export default function usePoofController(props) {
             this.ready = false;
         }
 
+        // makes sure poof sprite sheet has loaded before attempting 
+        // a draw
         async initPoof() {
             const poof = new Poof(-50, -50);
             await poof.init();
@@ -18,6 +20,8 @@ export default function usePoofController(props) {
             this.ready = true;
         }
 
+        // logic to create a new poof object, called in game canvas
+        // when collision is detected between projectile and target
         spawn(x, y) {
             if (this.ready) {
                 let newPoof = new Poof(x, y);
@@ -26,6 +30,9 @@ export default function usePoofController(props) {
             }
         }
 
+        // draw method calling poof draw method for each poof instantiated,
+        // & calling cleanup method to remove poofs that have completed their
+        // animation
         draw(ctx, poofLoopIndex) {
             this.poofs.forEach((poof) => {
                 this.cleanup(poof);
@@ -33,6 +40,8 @@ export default function usePoofController(props) {
             });
         }
 
+        // cleanup method to check if framecount of poof has exceeded frames
+        // available in animation, and remove poof object from array
         cleanup(sprite) {
             if (sprite.frameCount > 29) {
                 const index = this.poofs.indexOf(sprite);

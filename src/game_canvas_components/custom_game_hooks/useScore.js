@@ -9,10 +9,14 @@ export default function useScore() {
             this.score = 0;
         }
 
+        // method to add point to score, called every time a target
+        // is hit by a projectile
         updateScore() {
             this.score ++
         }
 
+        // this handles score and transparent background - background
+        // adjusts size at double digits
         draw(ctx) {
             if (this.score > 9 && this.width === 60) {
                 this.width += 55;
