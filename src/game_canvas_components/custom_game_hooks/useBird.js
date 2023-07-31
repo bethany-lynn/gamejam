@@ -1,6 +1,16 @@
 export default function useBird() {
   let birdSheet = new Image();
-  birdSheet.src = "/sprites/bird_3_robin.png";
+  let birdChoice = Math.floor(Math.random() * 3);
+
+  // picks one of 3 birds to use as the sprite
+
+  if (birdChoice === 0) {
+    birdSheet.src = "/sprites/bird_1_bluejay.png";
+  } if (birdChoice === 1) {
+    birdSheet.src = "/sprites/bird_2_cardinal.png";
+  } if (birdChoice === 2) {
+    birdSheet.src = "/sprites/bird_3_robin.png";
+  }
 
   // A Promise to handle image loading
   const birdSheetLoadedPromise = new Promise((resolve, reject) => {
@@ -18,7 +28,7 @@ export default function useBird() {
       this.x = x;
       this.y = y;
       this.projectileController = projectileController;
-      this.speed = 10;
+      this.speed = 12;
       this.scale = 3;
       this.width = 32;
       this.height = 32;
@@ -29,18 +39,21 @@ export default function useBird() {
       this.spriteSheet = birdSheet;
       this.ready = false;
       this.maxHeight = 35;
-      this.minHeight = 525;
+      this.minHeight = 470;
       this.initBird();
 
       document.addEventListener("keydown", this.keydown);
       document.addEventListener("keyup", this.keyup);
     }
 
+    // makes sure the sprite sheet is loaded before trying to draw
     async initBird() {
       await birdSheetLoadedPromise;
       this.ready = true;
     }
 
+    // short hand method for longer canvas drawImage method, allowing
+    // for sprite animation
     drawFrame(ctx, frameX, frameY, canvasX, canvasY) {
       if (this.ready) {
         ctx.drawImage(
@@ -70,17 +83,17 @@ export default function useBird() {
       this.shoot();
     }
 
-    // methods responding to keypress - interactive elements
-
     shoot() {
       if (this.shootPressed) {
         const speed = 15;
         const delay = 15;
         const projectileX = this.x + this.width / 4;
-        const projectileY = this.y;
+        const projectileY = this.y + 24;
         this.projectileController.shoot(projectileX, projectileY, speed, delay);
       }
     }
+    
+    // methods responding to keypress - interactive elements
 
     move() {
       if (this.downPressed) {

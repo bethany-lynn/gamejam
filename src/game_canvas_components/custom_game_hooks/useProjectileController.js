@@ -6,21 +6,25 @@ export default function useProjectileController() {
   class ProjectileController {
     constructor(canvas) {
       this.canvas = canvas;
+      this.projectiles = [];
+      this.timerTillNextProjectile = 0;
     }
 
-    projectiles = [];
-    timerTillNextProjectile = 0;
-
+    // runs a timer to manage frequency of projectiles produced, then
+    // adds new projectiles to array
     shoot(x, y, speed, delay) {
       if (this.timerTillNextProjectile <= 0) {
         this.projectiles.push(new Projectile(x, y, speed));
 
         this.timerTillNextProjectile = delay;
+        //this timer accounts for the frequency of projectiles drawn
       }
 
       this.timerTillNextProjectile--;
     }
 
+    // loop to run draw on each projectile in the array; removes
+    // projectile if it is no longer within canvas boundaries
     draw(ctx, projectileLoopIndex) {
       this.projectiles.forEach((projectile) => {
         if (this.isProjectileOffScreen(projectile)) {
@@ -29,9 +33,10 @@ export default function useProjectileController() {
         }
         projectile.draw(ctx, projectileLoopIndex);
       });
-      // console.log("projectile controller draw logged")
     }
 
+    // loop to check if any collisions have occurred, then to check which ones
+    // and eject them from the array
     collideWith(sprite) {
       return this.projectiles.some((projectile) => {
         if (projectile.collideWith(sprite)) {
@@ -42,8 +47,9 @@ export default function useProjectileController() {
       });
     }
 
+    // Boolean checking position of projectile
     isProjectileOffScreen(projectile) {
-      return projectile.y <= -projectile.height;
+      return projectile.y >= this.canvas.height + projectile.height;
     }
   }
   return { ProjectileController };

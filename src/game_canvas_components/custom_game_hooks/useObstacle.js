@@ -34,6 +34,8 @@ export default function useObstacle() {
       this.frameY = Math.floor(Math.random() * this.spriteSets);
     }
 
+    // short hand method for longer canvas drawImage method, allowing
+    // for sprite animation
     drawFrame(ctx, frameX, frameY, canvasX, canvasY) { // method for drawing specific frame
       if (this.ready) { // checks if promise is good - image is loaded from sheet
         ctx.drawImage( // actual drawing happening
@@ -59,10 +61,7 @@ export default function useObstacle() {
       if (!this.ready) { // if not ready, immediately return from method
         return;
       }
-      ctx.fillStyle = "transparent";
       this.x -= this.speed; // move from right to left of canvas by x position
-      ctx.fillRect(this.x, this.y, this.scaledWidth, this.scaledHeight);
-      // this.drawFrame(ctx, 5 + obstacleLoopIndex, 1, this.x, this.y) // drawFrame from Obstacle instance
       this.drawFrame(ctx, this.frameX * 5 + obstacleLoopIndex, this.frameY, this.x, this.y)
     }
 

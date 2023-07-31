@@ -1,25 +1,31 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import useBird from "./custom_game_hooks/useBird";
 import useProjectileController from "./custom_game_hooks/useProjectileController";
 import usePoofController from "./custom_game_hooks/usePoofController";
 import useTargetController from "./custom_game_hooks/useTargetController";
 import useObstacleController from "./custom_game_hooks/useObstacleController";
+import useScore from "./custom_game_hooks/useScore";
 import "./GameCanvas.css";
 
 export default function GameCanvas(props) {
-
   const canvasRef = useRef();
+  // const [score, setScore] = useState(0);
 
   let { Bird } = useBird();
   let { ProjectileController } = useProjectileController();
   let { PoofController } = usePoofController();
   let { TargetController } = useTargetController();
   let { ObstacleController } = useObstacleController();
+  let { Score } = useScore();
 
-  let score = 0;
-  const updateAndRedraw = useRef(true);
+  let scoreVar = 0;
+  const scoreRef = useRef(0);
 
   useEffect(() => {
+    ////////////////
+    // Canvas & Animation variables
+    ////////////////
+
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
     let frameCount = 0; // assuming ~ 60 fps
@@ -30,31 +36,30 @@ export default function GameCanvas(props) {
     let poofLoopIndex = 0;
     let render = true;
 
+    ////////////////
+    // Instantiate the things!
+    ////////////////
+
     const targetController = new TargetController(canvas);
     const poofController = new PoofController(canvas);
     const projectileController = new ProjectileController(canvas);
     const obstacleController = new ObstacleController(canvas);
+    const score = new Score();
     const bird = new Bird(
       canvas.width / 6,
       canvas.height / 2.1,
       projectileController
     );
 
-    function debug(msg) {
-      console.debug(msg, {
-        bird: {
-          x: bird.x,
-          y: bird.y,
-          widthX: bird.x + bird.width,
-          heightY: bird.y + bird.height,
-        },
-        obstacles: obstacleController.obstacles.map(
-          ({ x, y, width, height }) => ({ x, y, width, height })
-        ),
-      });
-    }
+    ////////////////
+    // Game Loop
+    ////////////////
 
     function game() {
+      ////////////////
+      // managing variables for sprite animation loops
+      ////////////////
+
       frameCount++;
 
       if (frameCount && frameCount % 12 === 0) {
@@ -81,101 +86,73 @@ export default function GameCanvas(props) {
         projectileLoopIndex = 1;
       }
 
-      if (updateAndRedraw.current) {
-        console.count("update");
-        debug("before");
-        context.clearRect(0, 0, canvas.width, canvas.height);
+      ////////////////
+      // running draw methods to update canvas every frame
+      ////////////////
 
-        projectileController.draw(context, projectileLoopIndex);
-        bird.draw(context, birdLoopIndex);
+      context.clearRect(0, 0, canvas.width, canvas.height);
 
-        targetController.draw(
-          context,
-          canvas.width,
-          (8 * canvas.height) / 9,
-          foodLoopIndex
-        );
+      score.draw(context);
 
-        obstacleController.draw(
-          context,
-          canvas.width,
-          canvas.height,
-          score,
-          obstacleLoopIndex
-        );
+      projectileController.draw(context, projectileLoopIndex);
 
-        targetController.targets.forEach((target) => {
-          if (projectileController.collideWith(target)) {
-            console.log("hit a target");
-            score++;
-            targetController.draw(
-              context,
-              canvas.width,
-              (8 * canvas.height) / 9,
-              foodLoopIndex
-            );
+      bird.draw(context, birdLoopIndex);
 
-            poofController.draw(context, poofLoopIndex);
-          }
-        });
+      targetController.draw(
+        context,
+        canvas.width,
+        (8 * canvas.height) / 9,
+        foodLoopIndex
+      );
 
-        projectileController.projectiles.forEach((projectile) => {
-          if (targetController.collideWith(projectile)) {
-            poofController.spawn(projectile.x, projectile.y);
-            console.log("goodbye target animation");
-          }
-        });
+      poofController.draw(context, poofLoopIndex);
 
-        targetController.targets.forEach((target) => {
-          if (projectileController.collideWith(target)) {
-            console.log("hit a target");
-            score += 1;
-            // setCollidedTarget(target); // Store the collided target
-            // props.setScore(score);
-          }
-        });
+      obstacleController.draw(
+        context,
+        canvas.width,
+        canvas.height,
+        scoreVar,
+        obstacleLoopIndex
+      );
 
-        obstacleController.obstacles.forEach((obstacle) => {
-          if (projectileController.collideWith(obstacle)) {
-            console.log("hit a balloon");
-          }
-        });
-        debug("after");
-        updateAndRedraw.current = false;
-      }
+      ////////////////
+      // running collision methods to check each frame after draw
+      ////////////////
+
+      projectileController.projectiles.forEach((projectile) => {
+        if (targetController.collideWith(projectile)) {
+          poofController.spawn(projectile.x, projectile.y);
+          scoreVar++;
+          score.updateScore();
+        }
+      });
+
+      obstacleController.obstacles.forEach((obstacle) => {
+        if (projectileController.collideWith(obstacle)) {
+        }
+      });
 
       if (obstacleController.collideWith(bird)) {
         props.setGameOver(true);
         render = false;
-        console.log("bird collided with obstacle");
       }
 
+      // RAF to set frame rate
       if (render) {
         requestAnimationFrame(game);
+      } else {
+        cancelAnimationFrame(game);
       }
     }
 
     requestAnimationFrame(game);
-  }, [
-    Bird,
-    ObstacleController,
-    ProjectileController,
-    TargetController,
-    // gameStopped,
-  ]);
+  }, [Bird, ObstacleController, ProjectileController, TargetController]);
 
   return (
     <>
-      <h2 className="score-box">{score}</h2>
       <canvas className="birdCanvas" width="1200" height="675" ref={canvasRef}>
         Lil Bird Game!
       </canvas>
-      <button
-        onClick={() => (updateAndRedraw.current = true)}
-        style={{ marginTop: "-20px" }}
-      >
-        Advance
-      </button>
     </>
   );
 }

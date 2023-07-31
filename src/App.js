@@ -6,18 +6,15 @@ import React, { useState } from "react";
 
 function App(props) {
   const [gameOver, setGameOver] = useState(true);
-  const [score, setScore] = useState(0);
   const [gameStarted, setGameStarted] = useState(false); // access state value, current and updated
 
   // initialize and reset/start blank variable states
   const handleStartGame = () => { // start game with state of 3 variables
-    setScore(0);
     setGameOver(false);
     setGameStarted(true);
   };
 
   const handleRestartGame = () => {
-    setScore(0);
     setGameOver(false);
   };
 
@@ -29,7 +26,6 @@ function App(props) {
             <GameWrapper
               gameOver={gameOver}
               setGameOver={setGameOver}
-              setScore={setScore}
             />
           ) : (
             <EndScreen onRestartGame={() => handleRestartGame()} /> // passing oRG prop to EndScreen component - invokes handle when arrow function called
