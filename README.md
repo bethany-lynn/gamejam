@@ -59,3 +59,5 @@ until new things are tried!
 - [HTML5 JavaScript Game Development - Setup HTML5 Canvas Game](https://spicyyoghurt.com/tutorials/html5-javascript-game-development/setup-html5-canvas-game)
 - [HTML5 JavaScript Game Development - Collision Detection Physics](https://spicyyoghurt.com/tutorials/html5-javascript-game-development/collision-detection-physics)
 - [How to Shoot Bullets in JavaScript - Coding with Adam](https://www.youtube.com/watch?v=i7FzA4NavDs&t=1227s)
+- [Poof animation on targets when hit - Jellyfizh on OpenGameArt](https://opengameart.org/content/poof-effect-spritesheet)
+- [Parallax forest background on OpenGameArt](https://opengameart.org/content/forest-background)
