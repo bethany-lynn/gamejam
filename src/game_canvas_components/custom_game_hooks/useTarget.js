@@ -1,5 +1,9 @@
 export default function useTarget(props) {
 
+// A component with a Target class to instantiate attributes to the targets that are drawn 
+// Asynchronous initiation for a sprite sheet to load and be ready for use/drawing
+// Using random methods to load a different sprite from the sheet on each draw
+
   const foodSheet = new Image();
   foodSheet.src = "/sprites/foodiesBorderandBorderless.png";
 
@@ -61,7 +65,6 @@ export default function useTarget(props) {
 
     draw(ctx, foodLoopIndex) {
       if(!this.ready) {
-        // console.log("helllllppppp")
         return;
       }
       this.x -= this.speed;

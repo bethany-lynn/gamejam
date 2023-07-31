@@ -1,5 +1,7 @@
 import './Parallax.css';
 
+// Component for rendering layers of the forest background
+
 export default function Parallax() {
     return (
         <div className='parallax-wrapper'>

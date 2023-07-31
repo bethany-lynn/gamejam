@@ -1,6 +1,8 @@
 import React from "react";
 import './EndScreen.css';
 
+// Component for rendering an End Screen with a "play again" button on game over
+
 export default function EndScreen({ onRestartGame }) {
   return (
     <div className="EndScreen">
