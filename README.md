@@ -3,12 +3,11 @@ A cozy screen runner made by June Adams and Bethany Lynn. <br/>
 - [June's GitHub Profile](https://github.com/juneadam) 🧙‍♀️ <br/>
 - [Bethany's GitHub Profile](https://github.com/bethany-lynn) :elf:
 
-
 ### Description ⭐
-Lil Bird is just trying to fly peacefully through her forest, enjoying the sounds and sights of nature. But a group of
-loud and messy humans are disrupting her peaceful afternoon with their human party. How rude! Their balloons and 
-snacks are getting everywhere, and Lil Bird needs to be careful as she flies home.
-Maybe she should send these humans a little message, in the form of a dropping, so they know better than to litter
+Lil Bird and her friends are just trying to fly peacefully through their forest, enjoying the sounds and sights of nature. But a group of
+loud and messy humans are disrupting their peaceful afternoon with their human party. How rude! Their balloons and 
+snacks are getting everywhere, and Lil Bird and her friends needa to be careful as she flies home.
+Maybe they should send these humans a little message, in the form of a dropping, so they know better than to litter
 in her home!
 
 ### Getting Started :video_game:
@@ -49,6 +48,8 @@ until new things are tried!
 
 ### Resources :book:
 - [OpenGameArt](https://opengameart.org/)
+- [Poof animation on targets when hit - Jellyfizh on OpenGameArt](https://opengameart.org/content/poof-effect-spritesheet)
+- [Parallax forest background on OpenGameArt](https://opengameart.org/content/forest-background)
 - Balloon Sprites by Chester on [OpenGameArt](https://opengameart.org/content/balloons)
 - "[LPC] Birds" by bluecarrot16, commissioned by castelonia. [OpenGameArt](https://opengameart.org/content/lpc-birds)
 - [Google Fonts](https://fonts.google.com/)
@@ -62,4 +63,8 @@ until new things are tried!
 - [HTML5 JavaScript Game Development - Setup HTML5 Canvas Game](https://spicyyoghurt.com/tutorials/html5-javascript-game-development/setup-html5-canvas-game)
 - [HTML5 JavaScript Game Development - Collision Detection Physics](https://spicyyoghurt.com/tutorials/html5-javascript-game-development/collision-detection-physics)
 - [How to Shoot Bullets in JavaScript - Coding with Adam](https://www.youtube.com/watch?v=i7FzA4NavDs&t=1227s)
-- Thanks to Val Currie for all the help and rubber ducking!
+
+- Thanks to Val Currie for all the help and rubber ducking!🦆
+
+
+
